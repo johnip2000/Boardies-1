@@ -27,7 +27,7 @@ E-commerce web-based application provides board game to customer.
 * Clone project: Git clone https://github.com/marktrr/Boardies.git
 * Install dependencies before run: npm install
 
-##Usage
+## Usage
 * npm start and run localhost:7000
 
 
