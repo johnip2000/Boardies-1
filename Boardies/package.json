@@ -2,7 +2,6 @@
   "name": "untitled",
   "version": "0.0.0",
   "private": true,
-  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node --experimental-modules --es-module-specifier-resolution=node server.js"
@@ -16,7 +15,6 @@
     "express-validator": "^6.6.1",
     "jsdom": "^16.4.0",
     "method-override": "^3.0.0",
-    "mongoose": "^5.9.6",
     "msnodesqlv8": "^2.0.11",
     "mssql": "^6.3.1",
     "multer": "^1.4.2",

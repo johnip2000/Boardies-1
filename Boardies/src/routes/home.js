@@ -1,5 +1,5 @@
-import express from "express";
-import HomeController from "../controllers/home";
+var express = require('express');
+var HomeController = require('../controllers/home');
 
 const router = express.Router();
 const homeController = new HomeController();
@@ -9,5 +9,6 @@ router
     .get('/about-us', homeController.AboutUs)
     .get('/contact-us', homeController.ContactUs)
     .get('/FAQ', homeController.FAQ)
+    .get('/login', homeController.Login)
 
-export default router;
+module.exports = router;

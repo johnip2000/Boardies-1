@@ -1,3 +1,4 @@
+/* Top bar message */
 .top-bar {
   color: #495057;
   background: #f8f9fa;
@@ -11,6 +12,13 @@
   font-size: 1.125rem;
 }
 
+.top-content h4 {
+  color: purple;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+/* Footer */
 .footer-copyright {
   padding: 15px;
   color: white;
@@ -18,11 +26,13 @@
   font-size: 1.125rem;
 }
 
+/* Container-fluid or container */
 .container-fluid {
   width: 100%!important;
   max-width: 1200px!important
 }
 
+/* Nav Menu */
 .nav-item {
   margin-left: 4em;
 }
@@ -32,12 +42,7 @@
   color: #495057;
 }
 
-.top-content h4 {
-  color: purple;
-  text-align: center;
-  text-transform: uppercase;
-}
-
+/* Swiper */
 .swiper-container {
   width: 100%;
   height: 200px;
@@ -64,6 +69,7 @@
   align-items: center;
 }
 
+/* Categories */
 .categories-wrapper {
   border: 4px solid ghostwhite;
 }
@@ -75,6 +81,7 @@
   margin-left: 2em;
 }
 
+/* FAQ Section */
 .faqHeader {
   font-size: 27px;
   margin: 20px;
@@ -103,4 +110,13 @@
   -o-transform: rotate(90deg);
   transform: rotate(90deg);
   color: #454444;
+}
+
+/* Login and SignUp */
+.block-header{
+  background: #f8f9fa;
+  padding: 1em;
+}
+.block-body .block-header{
+  padding: 1.2rem 1.5rem
 }

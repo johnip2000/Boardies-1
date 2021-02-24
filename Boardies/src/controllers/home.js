@@ -1,5 +1,14 @@
+const { sql,poolPromise } = require('../config/database')
 class HomeController {
     async Index(req, res) {
+        try {
+            const pool = await poolPromise
+            const result = await pool.request()
+                .query("SELECT * FROM Users")
+            console.log(result.recordset)
+        } catch (error) {
+            console.log(error.message)
+        }
         return res.render('pages/homepage');
     }
     async AboutUs(req, res) {
@@ -11,6 +20,9 @@ class HomeController {
     async FAQ(req, res) {
         return res.render('pages/faq');
     }
+    async Login(req, res) {
+        return res.render('pages/login');
+    }
 }
 
-export default  HomeController
+module.exports =  HomeController
