@@ -42,11 +42,15 @@
   color: #495057;
 }
 
+.swiper-slide .product-image {
+  margin-bottom: 20px;
+}
+
 /* Swiper */
 .swiper-container {
-  width: 100%;
-  height: 200px;
-  margin: 20px auto;
+  width: 80%;
+  height: 250px;
+  margin: auto;
 }
 
 .swiper-slide {
@@ -120,3 +124,5 @@
 .block-body .block-header{
   padding: 1.2rem 1.5rem
 }
+
+

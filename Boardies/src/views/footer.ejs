@@ -85,15 +85,40 @@
 
 <!-- Initialize Swiper -->
 <script>
-    var appendNumber = 4;
-    var prependNumber = 1;
     var swiper = new Swiper('.swiper-container', {
-        slidesPerView: 3,
-        centeredSlides: true,
+        slidesPerView: 5,
+        slidesPerColumn: 1,
         spaceBetween: 30,
-        pagination: {
-            el: '.swiper-pagination',
-            clickable: true,
+        slidesOffsetBefore: 11,
+        grabCursor: true,
+        mousewheel: true,
+        freeMode: true,
+        scrollbar: {
+            el: '.swiper-scrollbar',
+            hide: false
+        },
+
+        breakpoints: {
+            1024: {
+                slidesPerView: 4,
+                slidesPerColumn: 1,
+                spaceBetween: 40,
+            },
+            992: {
+                slidesPerView: 3,
+                slidesPerColumn: 1,
+                spaceBetween: 30,
+            },
+            768: {
+                slidesPerView: 2,
+                slidesPerColumn: 1,
+                spaceBetween: 15,
+            },
+            320: {
+                slidesPerView: 1,
+                slidesPerColumn: 1,
+                spaceBetween: 15,
+            }
         }
     });
 </script>
