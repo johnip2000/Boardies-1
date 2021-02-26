@@ -10,5 +10,6 @@ router
     .get('/contact-us', homeController.ContactUs)
     .get('/FAQ', homeController.FAQ)
     .get('/login', homeController.Login)
+    .get('/shipping-info', homeController.ShippingInfo)
 
 module.exports = router;

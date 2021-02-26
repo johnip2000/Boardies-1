@@ -18,6 +18,9 @@ class HomeController {
     async Login(req, res) {
         return res.render('pages/login');
     }
+    async ShippingInfo(req, res) {
+        return res.render('pages/shipping-info');
+    }
 }
 
 module.exports =  HomeController
