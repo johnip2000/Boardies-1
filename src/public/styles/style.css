@@ -46,13 +46,10 @@
   color: #495057;
 }
 
-.swiper-slide .product-image {
-  margin-bottom: 20px;
-}
 
 /* Swiper */
 .swiper-container {
-  width: 80%;
+  width: 90%;
   height: 250px;
   margin: auto;
 }
@@ -75,6 +72,11 @@
   -ms-flex-align: center;
   -webkit-align-items: center;
   align-items: center;
+}
+
+.swiper-slide .product-image {
+  margin-bottom: 20px;
+  margin-top: -2em;
 }
 
 /* Categories */

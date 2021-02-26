@@ -18,8 +18,8 @@
                         <div class="swiper-wrapper">
                             <% listGame.forEach(function(item){%>
                                 <div class="swiper-slide" >
-                                    <div class="d-flex product-image bg-gray-200">
-                                        <img src="<%=item.productImage%>" class="img-fluid d-block m-auto" alt="Tidal Blades: Heroes of the Reef – Angler&#039;s Cove">
+                                    <div class="product-image bg-gray-200">
+                                        <img src="<%=item.productImage%>" class="img-fluid d-block m-auto" alt="<%=item.productName%>">
                                     </div>
                                 </div>
                             <% }); %>
