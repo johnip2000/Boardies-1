@@ -1,3 +1,7 @@
+.navbar{
+  font-family: "Lakki Reddy", sans-serif;
+}
+
 /* Top bar message */
 .top-bar {
   color: #495057;
@@ -13,12 +17,12 @@
 }
 
 .top-content h4 {
+  font-family: 'Lakki Reddy', cursive;
   color: purple;
   text-align: center;
   text-transform: uppercase;
 }
 
-/* Footer */
 .footer-copyright {
   padding: 15px;
   color: white;

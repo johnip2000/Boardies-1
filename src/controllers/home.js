@@ -1,15 +1,10 @@
 const { sql, poolPromise } = require('../config/database')
 class HomeController {
     async Index(req, res) {
-       /* try {
-            const pool = await poolPromise
-            const result = await pool.request()
-                .query("SELECT * FROM Users")
-            console.log(result.recordset)
-        } catch (error) {
-            console.log(error.message)
-        }*/
-        return res.render('pages/homepage');
+        const pool = await poolPromise;
+        const result = await pool.request().query("SELECT TOP(10) * FROM Products");
+        const listCategories = await pool.request().query("SELECT * FROM Categories");
+        return res.render('pages/homepage', {listGame: result.recordset, Categories: listCategories.recordset});
     }
     async AboutUs(req, res) {
         return res.render('pages/about-us');
