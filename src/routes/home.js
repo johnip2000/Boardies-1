@@ -11,5 +11,6 @@ router
     .get('/FAQ', homeController.FAQ)
     .get('/login', homeController.Login)
     .get('/shipping-info', homeController.ShippingInfo)
+    .get('/cart', homeController.Cart)
 
 module.exports = router;
