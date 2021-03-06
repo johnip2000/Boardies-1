@@ -2,7 +2,7 @@ const sql = require('mssql/msnodesqlv8')
 
 const config = {
     database: 'Boardies',
-    server: 'localhost',
+    server: 'DESKTOP-EERPVD9\\SQL2019',
     driver: 'msnodesqlv8',
     options: {
         trustedConnection: true

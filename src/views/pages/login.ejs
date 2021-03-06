@@ -12,8 +12,7 @@
                             <div class="block-body">
                                 <p class="lead">Already a customer?</p>
                                 <hr>
-                                <form method="post" accept-charset="UTF-8">
-                                    <input type="hidden" name="action" value="users/login">
+                                <form method="post" action='/sign-in'>
                                     <div class="form-group">
                                         <label for="loginName" class="form-label">Email</label>
                                         <input id="loginName" type="text" name="loginName" value="" class="form-control">
@@ -44,8 +43,7 @@
                             <div class="block-body">
                                 <p class="lead">Not a registered customer yet?</p>
                                 <hr>
-                                <form method="post" accept-charset="UTF-8" autocomplete="off">
-                                    <input type="hidden" name="action" value="users/save-user">
+                                <form method="post" action='/sign-up'>
                                     <div class="form-row">
                                         <div class="form-group col">
                                             <label for="firstNameNew" class="form-label">First name</label>
