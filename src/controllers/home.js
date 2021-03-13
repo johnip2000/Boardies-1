@@ -1,10 +1,19 @@
-const { sql, poolPromise } = require('../config/database')
+const db = require('../config/database');
+const runQuery = db.runQuery;
+
 class HomeController {
     async Index(req, res) {
-        const pool = await poolPromise;
-        const result = await pool.request().query("SELECT TOP(10) * FROM Products");
-        const listCategories = await pool.request().query("SELECT * FROM Categories");
-        return res.render('pages/homepage', {listGame: result.recordset, Categories: listCategories.recordset});
+        runQuery("SELECT TOP(10) * FROM Products", function(result) {
+            runQuery("SELECT * FROM Categories", function(listCategories) {
+                var contextDict = {
+                    currentUrl: '/',
+                    title: 'Home',
+                    Categories: listCategories.recordset,
+                    listGame: result.recordset
+                };
+                return res.render('pages/homepage', contextDict);
+            });
+        });
     }
     async AboutUs(req, res) {
         return res.render('pages/about-us');

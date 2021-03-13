@@ -1,54 +1,54 @@
-const { sql, poolPromise } = require('../config/database')
+const db = require('../config/database');
+const runQuery = db.runQuery;
 
 class GamesController {
     async AllGame(req, res) {
-        const pool = await poolPromise;
-        const result = await pool.request().query("SELECT * FROM Products");
-        return res.render('games/allGame', {listGame: result.recordset});
+        runQuery("SELECT * FROM Products", function(result) {
+            return res.render('games/allGame', {listGame: result.recordset});
+        });
     }
 
     async ChildGame(req, res) {
-        const pool = await poolPromise;
-        const result = await pool.request().query("SELECT * FROM Products WHERE categoryID =1");
-        return res.render('games/childGame', {listGame: result.recordset});
+        runQuery("SELECT * FROM Products WHERE categoryID =1", function(result) {
+            return res.render('games/childGame', {listGame: result.recordset});
+        });       
     }
 
     async FamilyGame(req, res) {
-        const pool = await poolPromise;
-        const result = await pool.request().query("SELECT * FROM Products WHERE categoryID =2");
-        return res.render('games/familyGame', {listGame: result.recordset});
+        runQuery("SELECT * FROM Products WHERE categoryID =2", function(result) {
+            return res.render('games/familyGame', {listGame: result.recordset});
+        });    
     }
 
     async StrategyLGame(req, res) {
-        const pool = await poolPromise;
-        const result = await pool.request().query("SELECT * FROM Products WHERE categoryID =3");
-        return res.render('games/strategylGame', {listGame: result.recordset});
+        runQuery("SELECT * FROM Products WHERE categoryID =3", function(result) {
+            return res.render('games/strategylGame', {listGame: result.recordset});
+        });    
     }
 
     async StrategyAGame(req, res) {
-        const pool = await poolPromise;
-        const result = await pool.request().query("SELECT * FROM Products WHERE categoryID =4");
-        return res.render('games/strategyaGame', {listGame: result.recordset});
+        runQuery("SELECT * FROM Products WHERE categoryID =4", function(result) {
+            return res.render('games/strategyaGame', {listGame: result.recordset});
+        });   
     }
 
     async WarGame(req, res) {
-        const pool = await poolPromise;
-        const result = await pool.request().query("SELECT * FROM Products WHERE categoryID =5");
-        return res.render('games/warGame', {listGame: result.recordset});
+        runQuery("SELECT * FROM Products WHERE categoryID =5", function(result) {
+            return res.render('games/warGame', {listGame: result.recordset});
+        });   
     }
 
     async AdventuresGame(req, res) {
-        const pool = await poolPromise;
-        const result = await pool.request().query("SELECT * FROM Products WHERE categoryID =6");
-        return res.render('games/adventuresGame', {listGame: result.recordset});
+        runQuery("SELECT * FROM Products WHERE categoryID =6", function(result) {
+            return res.render('games/adventuresGame', {listGame: result.recordset});
+        });      
     }
 
     async Detail(req, res) {
         var productid = req.param('productID');
-        //console.log(productid);
-        const pool = await poolPromise;
-        const result = await pool.request().query("SELECT * FROM Products WHERE productID =" + productid);
-        return res.render('games/gameDetails', {listGame: result.recordset});
+        runQuery("SELECT * FROM Products WHERE productID =" + productid, function(result) {
+            return res.render('games/gameDetails', {listGame: result.recordset});
+        });           
     }
 }
 
