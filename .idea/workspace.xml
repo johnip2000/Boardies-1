@@ -20,20 +20,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8c2b9d39-01e5-45be-8105-a8030ea4acdd" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/views/pages/cart.ejs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/views/pages/shipping-info.ejs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/controllers/home.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/controllers/home.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/public/styles/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/public/styles/style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/home.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/home.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controllers/games.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/controllers/games.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routes/games.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/games.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/games/allGame.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/games/allGame.ejs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/views/header.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/header.ejs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/pages/login.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/pages/login.ejs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/pages/homepage.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/pages/homepage.ejs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -98,6 +89,7 @@
       <workItem from="1614746105675" duration="845000" />
       <workItem from="1614783134347" duration="997000" />
       <workItem from="1614989478047" duration="533000" />
+      <workItem from="1615600264045" duration="418000" />
     </task>
     <servers />
   </component>

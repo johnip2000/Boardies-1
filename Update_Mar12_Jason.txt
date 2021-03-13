@@ -1,0 +1,4 @@
+Adding Categories Photos
+Adding page to show products by their categories
+Adding a page showing games details
+Adding function of displaying details when product is clicked on
