@@ -19,7 +19,19 @@
     <select />
   </component>
   <component name="ChangeListManager">
+<<<<<<< HEAD
     <list default="true" id="8c2b9d39-01e5-45be-8105-a8030ea4acdd" name="Default Changelist" comment="" />
+=======
+    <list default="true" id="8c2b9d39-01e5-45be-8105-a8030ea4acdd" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controllers/users.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/controllers/users.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routes/users.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/users.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/pages/login.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/pages/login.ejs" afterDir="false" />
+    </list>
+>>>>>>> bca960f8734b9269d5d314708f7c8aacfa23bc51
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -29,7 +41,7 @@
     <execution />
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="1oakobgJK9FUOb2vaAvEFOEfXJU" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -42,8 +54,8 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="javascript.nodejs.core.library.configured.version" value="14.15.0" />
-    <property name="javascript.nodejs.core.library.typings.version" value="14.14.28" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/public/images" />
+    <property name="javascript.nodejs.core.library.typings.version" value="14.14.34" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path" value="node" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
@@ -80,6 +92,15 @@
       <workItem from="1614138693619" duration="5107000" />
       <workItem from="1614180127863" duration="7747000" />
       <workItem from="1614192653496" duration="6347000" />
+      <workItem from="1614746105675" duration="845000" />
+      <workItem from="1614783134347" duration="997000" />
+      <workItem from="1614989478047" duration="533000" />
+<<<<<<< HEAD
+      <workItem from="1615600264045" duration="642000" />
+=======
+      <workItem from="1615600264045" duration="418000" />
+      <workItem from="1615687917925" duration="88000" />
+>>>>>>> bca960f8734b9269d5d314708f7c8aacfa23bc51
     </task>
     <servers />
   </component>
