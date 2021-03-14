@@ -100,7 +100,6 @@ class UserController {
         delete req.session.username;
             return res.redirect('/');
     }
-
 }
 
 module.exports =  UserController
