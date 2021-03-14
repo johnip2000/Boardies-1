@@ -19,13 +19,7 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8c2b9d39-01e5-45be-8105-a8030ea4acdd" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/src/controllers/games.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/controllers/games.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/games.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/games.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/games/allGame.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/games/allGame.ejs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/header.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/header.ejs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/pages/homepage.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/pages/homepage.ejs" afterDir="false" />
-    </list>
+    <list default="true" id="8c2b9d39-01e5-45be-8105-a8030ea4acdd" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -89,7 +83,7 @@
       <workItem from="1614746105675" duration="845000" />
       <workItem from="1614783134347" duration="997000" />
       <workItem from="1614989478047" duration="533000" />
-      <workItem from="1615600264045" duration="418000" />
+      <workItem from="1615600264045" duration="642000" />
     </task>
     <servers />
   </component>
