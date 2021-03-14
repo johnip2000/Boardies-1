@@ -7,13 +7,20 @@ const config = {
     options: {
         trustedConnection: true
     }
-}
-const poolPromise = new sql.ConnectionPool(config)
-    .connect()
-    .then(pool => {
-        console.log('Connected to MSSQL')
-        return pool
-    })
-    .catch(err => console.log('Database Connection Failed! Bad Config: ', err))
+};
 
-module.exports = {sql, poolPromise}
+function runQuery(sqlQuery, callback) {
+    sql.connect(config, function (err) {
+        if (err) console.log(err);
+        var request = new sql.Request();
+        request.query(sqlQuery, function (err, recordset) {
+            if(err) {
+                console.log(err);
+            }
+            callback(recordset); // USING CALLBACK
+        });
+    });    
+};
+module.exports = {
+    runQuery: runQuery
+};

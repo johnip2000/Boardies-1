@@ -67,19 +67,6 @@
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                SERVICES
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="#"></a>
-                                <a class="dropdown-item" href="#"></a>
-                                <a class="dropdown-item" href="#"></a>
-                                <a class="dropdown-item" href="#"></a>
-                                <a class="dropdown-item" href="#"></a>
-                                <a class="dropdown-item" href="#"></a>
-                            </div>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 INFORMATION
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -92,9 +79,12 @@
                             </div>
                         </li>
                     </ul>
-                    <i class="fa fa-search fa-lg" aria-hidden="true"></i>
-                    <i class="fa fa-user-circle fa-lg ml-4" aria-hidden="true"></i>
-                    <i class="fa fa-shopping-cart fa-lg ml-4" aria-hidden="true"></i>
+                    <form class="form-inline my-2 my-lg-0">
+                        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                        <button class="btn btn-outline-dark my-2 my-sm-0" type="submit">Search</button>
+                      </form>
+                    <a class="text-dark" href="/login"><i class="fa fa-user-circle fa-lg ml-4" aria-hidden="true"></i></a>
+                    <a class="text-dark" href="/cart"><i class="fa fa-shopping-cart fa-lg ml-4" aria-hidden="true"></i></a>
                 </div>
             </div>
         </nav>
