@@ -12,8 +12,9 @@ E-commerce web-based application provides board game to customer.
 ## Technologies
 * NodeJS
 * Express
-* HTML5 
+* EJS (HTML5 Template)
 * CSS3
+* Bootstrap 4
 * JavaScript
 * C#
 * Microsoft SQL Server
