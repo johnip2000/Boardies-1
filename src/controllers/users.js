@@ -15,22 +15,24 @@ class UserController {
         }
         else {
             runQuery('SELECT * FROM Users WHERE email = \'' + email + '\'', function(user){
-                if(user.recordset && bcrypt.compareSync(password, user.recordset[0].userPassword)) {
-                    req.session.loggedin = true;
-                    req.session.username = email;
-                    runQuery("SELECT TOP(10) * FROM Products", function(result) {
-                        runQuery("SELECT * FROM Categories", function(listCategories) {
-                            var contextDict = {
-                                currentUrl: '/',
-                                title: 'Home',
-                                Categories: listCategories.recordset,
-                                listGame: result.recordset,
-                                isAdmin: user.recordset[0].isAdmin,
-                                isLogin: true
-                            };
-                            return res.render('pages/homepage', contextDict);
-                        });
-                    });            
+                if(user.recordset.length > 0) {
+                    if(user.recordset && bcrypt.compareSync(password, user.recordset[0].userPassword)) {
+                        req.session.loggedin = true;
+                        req.session.username = email;
+                        runQuery("SELECT TOP(10) * FROM Products", function(result) {
+                            runQuery("SELECT * FROM Categories", function(listCategories) {
+                                var contextDict = {
+                                    currentUrl: '/',
+                                    title: 'Home',
+                                    Categories: listCategories.recordset,
+                                    listGame: result.recordset,
+                                    isAdmin: user.recordset[0].isAdmin,
+                                    isLogin: true
+                                };
+                                return res.render('pages/homepage', contextDict);
+                            });
+                        });            
+                    }
                 }
                 else {
                     return res.render('pages/login', {
