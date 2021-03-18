@@ -8,7 +8,7 @@
                     <div class="block-header"><strong class="text-uppercase">Personal details</strong></div>
                         <div class="block-body mt-5">
                             <form method="post" action="/customer/profile/save">
-                                <input type="hidden" name="userID" value="">
+                                <input type="hidden" name="userID" value="<%=userInfo.userID%>">
                                 <div class="row">
                                     <div class="col-sm-6">
                                         <div class="form-group">
@@ -31,11 +31,16 @@
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <label for="password" class="form-label">Current password</label>
-                                            <input id="password" name="password" type="password" class="form-control">
-                                            <span name="passwordError"></span>
+                                            <input id="password" name="password" type="password" class="form-control" aria-describedby="passwordError">
+                                            <% if(typeof passwordError !== 'undefined' && passwordError) { %>
+                                                <small id="passwordError" class="form-text text-danger font-weight-bold"><%=passwordError%></small>
+                                            <% } %>                                   
                                         </div>
                                     </div>
                                 </div>
+                                <% if(typeof successUpdate !== 'undefined' && successUpdate) { %>
+                                    <small id="successUpdate" class="form-text text-success font-weight-bold text-center mt-2"><%=successUpdate%></small>
+                                <% } %>  
                                 <div class="text-center mt-4">
                                     <button type="submit" class="btn btn-outline-dark"><i class="far fa-save mr-2"></i>Save changes</button>
                                 </div>
