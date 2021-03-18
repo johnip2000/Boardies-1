@@ -1,0 +1,74 @@
+<%- include('../header'); -%>
+
+<div class="mb-auto">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 col-xl-9">
+                <div class="block mb-5 mt-5">
+                    <div class="block-header"><strong class="text-uppercase">Personal details</strong></div>
+                        <div class="block-body mt-5">
+                            <form method="post" action="/customer/profile/save">
+                                <input type="hidden" name="userID" value="">
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="fullName" class="form-label">Full Name</label>
+                                            <input id="fullName" name="fullName" type="text" class="form-control" value="<%=userInfo.fullName%>">           
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="phoneNumber" class="form-label">Phone Number</label>
+                                            <input id="phoneNumber" name="phoneNumber" type="text" class="form-control" value="<%=userInfo.phone%>">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="email" class="form-label">Email</label>
+                                            <input disabled id="email" name="email" type="text" class="form-control" value="<%=userInfo.email%>">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="password" class="form-label">Current password</label>
+                                            <input id="password" name="password" type="password" class="form-control">
+                                            <span name="passwordError"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="text-center mt-4">
+                                    <button type="submit" class="btn btn-outline-dark"><i class="far fa-save mr-2"></i>Save changes</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            <div class="col-xl-3 col-lg-4 mb-5 mt-5">
+                <div class="customer-sidebar card border-0">
+                    <div class="customer-profile">
+                        <h5>Mark Tran</h5>
+                    </div>
+                    <nav class="list-group customer-nav">
+                        <a href="/customer/profile" class="list-group-item active">
+                            <i class="far fa-user-circle mr-2"></i> Profile
+                        </a>
+                        <a href="/customer/address" class="list-group-item">
+                            <i class="fas fa-map-marker-alt mr-2"></i> Address Information
+                        </a>
+                        <a href="/customer/orders" class="list-group-item">
+                            <i class="fas fa-shopping-bag mr-2"></i> Your Order
+                        </a>
+                        <a href="/customer/changepassword" class="list-group-item"><span>
+                          <i class="fas fa-key mr-2"></i>Change your password</span>
+                        </a>
+                        <a href="/logout" class="list-group-item"><span>
+                            <i class="fas fa-sign-out-alt mr-2"></i>Log out</span>
+                          </a>    
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<%- include('../footer'); -%>

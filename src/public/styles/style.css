@@ -131,4 +131,35 @@
   padding: 1.2rem 1.5rem
 }
 
+/* User Profile Management */
+
+.customer-profile {
+	text-align: center;
+	background: #f8f9fa;
+	padding: 2rem
+}
+
+.customer-image {
+	padding: .5rem;
+	background: #fff;
+	max-width: 10rem;
+	margin-bottom: 1.5rem
+}
+
+.customer-nav .list-group-item {
+	color: #495057;
+	font-size: .9rem;
+	border-color: #e9ecef
+}
+
+.customer-nav .list-group-item:focus,
+.customer-nav .list-group-item:hover {
+	background: #f8f9fa
+}
+
+.customer-nav .list-group-item.active {
+	background: #adafb1;
+	border-color: #e9ecef
+}
+
 

@@ -18,9 +18,9 @@ class UserController {
                 if(user.recordset.length > 0) {
                     if(user.recordset && bcrypt.compareSync(password, user.recordset[0].userPassword)) {
                         req.session.loggedin = true;
-                        req.session.username = email;
-                        runQuery("SELECT TOP(10) * FROM Products", function(result) {
-                            runQuery("SELECT * FROM Categories", function(listCategories) {
+                        req.session.username = user.recordset[0].userName;
+                        runQuery('SELECT TOP(10) * FROM Products', function(result) {
+                            runQuery('SELECT * FROM Categories', function(listCategories) {
                                 var contextDict = {
                                     currentUrl: '/',
                                     title: 'Home',
@@ -46,8 +46,8 @@ class UserController {
     }
 
     async SignUp(req, res) {
-        let {firstname, lastname, emailNew, passwordNew} = req.body;
-        if(firstname == "" || lastname == "" || emailNew == "" || passwordNew == "") {
+        let {fullName, emailNew, passwordNew} = req.body;
+        if(fullName == "" || emailNew == "" || passwordNew == "") {
             return res.render('pages/login', {
                 signUpError: "Field cannot be empty. please try again",
                 isAdmin: false,
@@ -65,7 +65,6 @@ class UserController {
             }
             else {
                 const userID = Math.random().toString(36).substr(2, 9);
-                var fullName = firstname + ', ' + lastname;
                 var passwordHash = bcrypt.hashSync(passwordNew, 10);
                 var insertQuery = 'INSERT INTO Users(userID, fullName, email, userName, userPassword, isAdmin)\
                                     VALUES(\'' + userID + '\', \
@@ -77,8 +76,8 @@ class UserController {
                 runQuery(insertQuery, (result) => {
                     req.session.loggedin = true;
                     req.session.username = emailNew;
-                    runQuery("SELECT TOP(10) * FROM Products", function(result) {
-                        runQuery("SELECT * FROM Categories", function(listCategories) {
+                    runQuery('SELECT TOP(10) * FROM Products', function(result) {
+                        runQuery('SELECT * FROM Categories', function(listCategories) {
                             var contextDict = {
                                 currentUrl: '/',
                                 title: 'Home',

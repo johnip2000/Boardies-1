@@ -7,6 +7,8 @@ var flash = require('connect-flash');
 var HomeRouter = require('./routes/home');
 var GamesRouter = require('./routes/games');
 var UsersRouter = require('./routes/users');
+var ProfilesRouter = require('./routes/profiles');
+const ProfileController = require('./controllers/profiles');
 
 let app = express();
 
@@ -28,5 +30,6 @@ app.use(express.static(path.resolve() + '/src/public'));
 app.use('/', HomeRouter);
 app.use('/games', GamesRouter);
 app.use('/', UsersRouter);
+app.use('/customer', ProfilesRouter);
 
 module.exports = app;

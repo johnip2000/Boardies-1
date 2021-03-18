@@ -6,13 +6,12 @@ class HomeController {
         const isLogin = req.session.loggedin ? true : false;
         var isAdmin = false;
         if(req.session.username != "" && typeof(req.session.username) != 'undefined') {
-            var email = req.session.username;
-            runQuery("SELECT * FROM Users WHERE email = \'' + email + '\'", function(user) {
+            runQuery('SELECT * FROM Users WHERE email = \'' + req.session.username + '\'', function(user) {
                 isAdmin = user.recordset[0].isAdmin;
             }); 
         }
-        runQuery("SELECT TOP(10) * FROM Products", function(result) {
-            runQuery("SELECT * FROM Categories", function(listCategories) {
+        runQuery('SELECT TOP(10) * FROM Products', function(result) {
+            runQuery('SELECT * FROM Categories', function(listCategories) {
                 var contextDict = {
                     currentUrl: '/',
                     title: 'Home',
@@ -29,8 +28,7 @@ class HomeController {
         const isLogin = req.session.loggedin ? true : false;
         var isAdmin = false;
         if(req.session.username != "" && typeof(req.session.username) != 'undefined') {
-            var email = req.session.username;
-            runQuery("SELECT * FROM Users WHERE email = \'' + email + '\'", function(user) {
+            runQuery('SELECT * FROM Users WHERE email = \'' + req.session.username + '\'', function(user) {
                 isAdmin = user.recordset[0].isAdmin;
             }); 
         }
@@ -40,8 +38,7 @@ class HomeController {
         const isLogin = req.session.loggedin ? true : false;
         var isAdmin = false;
         if(req.session.username != "" && typeof(req.session.username) != 'undefined') {
-            var email = req.session.username;
-            runQuery("SELECT * FROM Users WHERE email = \'' + email + '\'", function(user) {
+            runQuery('SELECT * FROM Users WHERE email = \'' + req.session.username + '\'', function(user) {
                 isAdmin = user.recordset[0].isAdmin;
             }); 
         }
@@ -51,8 +48,7 @@ class HomeController {
         const isLogin = req.session.loggedin ? true : false;
         var isAdmin = false;
         if(req.session.username != "" && typeof(req.session.username) != 'undefined') {
-            var email = req.session.username;
-            runQuery("SELECT * FROM Users WHERE email = \'' + email + '\'", function(user) {
+            runQuery('SELECT * FROM Users WHERE email = \'' + req.session.username + '\'', function(user) {
                 isAdmin = user.recordset[0].isAdmin;
             }); 
         }
@@ -62,7 +58,7 @@ class HomeController {
         const isLogin = req.session.loggedin ? true : false;
         let isAdmin = false;
         if(typeof req.session.username != 'undefined') {
-            runQuery("SELECT * FROM Users WHERE email = \'' + req.session.username + '\'", function(user) {
+            runQuery('SELECT * FROM Users WHERE email = \'' + req.session.username + '\'', function(user) {
                 isAdmin =  user.recordset[0].isAdmin;
             }); 
         }
@@ -72,20 +68,22 @@ class HomeController {
         const isLogin = req.session.loggedin ? true : false;
         var isAdmin = false;
         if(req.session.username != "" && typeof(req.session.username) != 'undefined') {
-            var email = req.session.username;
-            runQuery("SELECT * FROM Users WHERE email = \'' + email + '\'", function(user) {
+            runQuery('SELECT * FROM Users WHERE email = \'' + req.session.username + '\'', function(user) {
                 isAdmin = user.recordset[0].isAdmin;
             }); 
         }
         return res.render('pages/shipping-info',{isLogin, isAdmin});
     }
 
+    async Error(req, res) {
+        return res.render('pages/errors');
+    }
+
     async Cart(req, res) {
         const isLogin = req.session.loggedin ? true : false;
         var isAdmin = false;
         if(req.session.username != "" && typeof(req.session.username) != 'undefined') {
-            var email = req.session.username;
-            runQuery("SELECT * FROM Users WHERE email = \'' + email + '\'", function(user) {
+            runQuery('SELECT * FROM Users WHERE email = \'' + req.session.username + '\'', function(user) {
                 isAdmin = user.recordset[0].isAdmin;
             }); 
         }
