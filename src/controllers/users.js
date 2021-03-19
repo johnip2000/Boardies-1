@@ -33,6 +33,13 @@ class UserController {
                             });
                         });            
                     }
+                    else {
+                        return res.render('pages/login', {
+                            signInError: "Wrong username or password",
+                            isAdmin: false,
+                            isLogin: false
+                        });  
+                    }
                 }
                 else {
                     return res.render('pages/login', {

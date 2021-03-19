@@ -8,7 +8,8 @@ router
     .get('/profile', profileController.getProfile)
     .get('/address', profileController.getAddress)
     .get('/address/edit', profileController.getAddressForm)
-    .get('/changepassword', profileController.ChangePassword)
-    .post('/profile/save', profileController.UpdateProfile);
+    .get('/changepassword', profileController.GetChangePassword)
+    .post('/profile/save', profileController.UpdateProfile)
+    .post('/changepassword', profileController.ChangePassword)
 
 module.exports = router;

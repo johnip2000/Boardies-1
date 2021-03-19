@@ -42,8 +42,7 @@ class ProfileController {
                                 var successUpdate = "New information successfully saved.";
                                 runQuery('SELECT * FROM Users WHERE email = \'' + req.session.username + '\'', function(user) { 
                                     return res.render('profiles/index', {isLogin, isAdmin, userInfo: user.recordset[0], successUpdate});
-                                })
-                                
+                                })        
                             })
                         }
                         else {
@@ -66,7 +65,7 @@ class ProfileController {
             if(req.session.username != "" && typeof(req.session.username) != 'undefined') {
                 runQuery('SELECT * FROM Users WHERE email = \'' + req.session.username + '\'', function(user) {
                     isAdmin = user.recordset[0].isAdmin;
-                    res.render('profiles/address', {isLogin, isAdmin});
+                    res.render('profiles/address', {isLogin, isAdmin, userInfo: user.recordset[0]});
                 }); 
             }
         }
@@ -82,7 +81,7 @@ class ProfileController {
             if(req.session.username != "" && typeof(req.session.username) != 'undefined') {
                 runQuery('SELECT * FROM Users WHERE email = \'' + req.session.username + '\'', function(user) {
                     isAdmin = user.recordset[0].isAdmin;
-                    res.render('profiles/addressForm', {isLogin, isAdmin});
+                    res.render('profiles/addressForm', {isLogin, isAdmin, userInfo: user.recordset[0]});
                 }); 
             }        
         }
@@ -90,6 +89,22 @@ class ProfileController {
 
     async getOrder(req, res) {
 
+    }
+
+    async GetChangePassword(req, res) {
+        const isLogin = req.session.loggedin ? true : false;
+        var isAdmin = false;
+        if(isLogin == false) {
+            return res.redirect('/errors');
+        }
+        else {
+            if(req.session.username != "" && typeof(req.session.username) != 'undefined') {
+                runQuery('SELECT * FROM Users WHERE email = \'' + req.session.username + '\'', function(user) {
+                    isAdmin = user.recordset[0].isAdmin;
+                    res.render('profiles/changepassword', {isLogin, isAdmin, userInfo: user.recordset[0]});
+                }); 
+            }        
+        }
     }
 
     async ChangePassword(req, res) {
@@ -102,8 +117,35 @@ class ProfileController {
             if(req.session.username != "" && typeof(req.session.username) != 'undefined') {
                 runQuery('SELECT * FROM Users WHERE email = \'' + req.session.username + '\'', function(user) {
                     isAdmin = user.recordset[0].isAdmin;
+                    let {userID, password, newPassword} = req.body;
+                    if(password == "" || newPassword == "") {
+                        if(password == "") {
+                            var passwordError = "Please enter your current password."
+                        }
+                        if(newPassword == "") {
+                            var newPasswordError = "Please enter your new password."
+                        }            
+                        return res.render('profiles/changepassword', {isLogin, isAdmin, userInfo: user.recordset[0], passwordError, newPasswordError});
+                    }
+                    else {
+                        if(bcrypt.compareSync(password, user.recordset[0].userPassword)) {
+                            var passwordHash = bcrypt.hashSync(newPassword, 10);
+                            const sqlUpdate = 'UPDATE Users SET userPassword = \'' + passwordHash + '\' WHERE userId = \'' + userID + '\' ';
+                            runQuery(sqlUpdate, (result) => {
+                                var updateMessage = "New password successfully saved.";
+                                runQuery('SELECT * FROM Users WHERE email = \'' + req.session.username + '\'', function(user) { 
+                                    return res.render('profiles/changepassword', {isLogin, isAdmin, userInfo: user.recordset[0], updateMessage});
+                                })
+                            })
+                        }
+                        else {
+                            var updateError = "Current password is not match, please try again.";
+                            return res.render('profiles/changepassword', {isLogin, isAdmin, userInfo: user.recordset[0], updateError});
+                        }
+                        
+                    }
+
                 }); 
-                res.render('profiles/changepassword', {isLogin, isAdmin});
             }  
         }
     }

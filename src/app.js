@@ -8,7 +8,6 @@ var HomeRouter = require('./routes/home');
 var GamesRouter = require('./routes/games');
 var UsersRouter = require('./routes/users');
 var ProfilesRouter = require('./routes/profiles');
-const ProfileController = require('./controllers/profiles');
 
 let app = express();
 
@@ -30,11 +29,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 const passport = require('passport');
 var userProfile;
 
-
 app.use(passport.initialize());
 app.use(passport.session());
-
-
 
 app.get('/success', (req, res) => res.send(userProfile));
 app.get('/error', (req, res) => res.send("error logging in"));
@@ -57,8 +53,6 @@ passport.use(new GoogleStrategy({
   function(accessToken, refreshToken, profile, done) {
       userProfile=profile;
       return done(null, userProfile);
-     
-
   }
 ));
 
@@ -74,9 +68,6 @@ app.get('/auth/google/callback',
     console.log(`name = ${userProfile.displayName}`)
     console.log(`emails = ${userProfile.emails[0].value}`)
     //you will get this
-    
-    
-  
     res.redirect('/success');
    // console.log(pool)
    
