@@ -2,6 +2,15 @@ const db = require('../config/database');
 const runQuery = db.runQuery;
 const bcrypt = require('bcryptjs');
 
+function isEmpty(input) {
+    if(input == "" || input == null || typeof(input) == 'undefined') {
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+
 class ProfileController {
     async getProfile(req, res) {
         const isLogin = req.session.loggedin ? true : false;
@@ -65,7 +74,10 @@ class ProfileController {
             if(req.session.username != "" && typeof(req.session.username) != 'undefined') {
                 runQuery('SELECT * FROM Users WHERE email = \'' + req.session.username + '\'', function(user) {
                     isAdmin = user.recordset[0].isAdmin;
-                    res.render('profiles/address', {isLogin, isAdmin, userInfo: user.recordset[0]});
+                    var userID = user.recordset[0].userID;
+                    runQuery('SELECT * FROM Addresses WHERE userID = \'' + userID + '\'', (address) => {
+                        return res.render('profiles/address', {isLogin, isAdmin, userInfo: user.recordset[0], address: address.recordset});
+                    })
                 }); 
             }
         }
@@ -82,6 +94,67 @@ class ProfileController {
                 runQuery('SELECT * FROM Users WHERE email = \'' + req.session.username + '\'', function(user) {
                     isAdmin = user.recordset[0].isAdmin;
                     res.render('profiles/addressForm', {isLogin, isAdmin, userInfo: user.recordset[0]});
+                }); 
+            }        
+        }
+    }
+
+    async AddAddress(req, res) {
+        const isLogin = req.session.loggedin ? true : false;
+        var isAdmin = false;
+        if(isLogin == false) {
+            return res.redirect('/errors');
+        }
+        else {
+            if(req.session.username != "" && typeof(req.session.username) != 'undefined') {
+                runQuery('SELECT * FROM Users WHERE email = \'' + req.session.username + '\'', function(user) {
+                    isAdmin = user.recordset[0].isAdmin;
+                    let {userID, fullName, address1, address2, city, province, postalCode, country, phone} = req.body;
+                    if(isEmpty(fullName) || isEmpty(address1) || isEmpty(city) || isEmpty(province) || isEmpty(postalCode)
+                         || isEmpty(country) || isEmpty(phone)) {
+                        if(isEmpty(fullName)) {
+                            var errFullName = "Please enter valid name";
+                        }
+                        if(isEmpty(address1)) {
+                            var errAddress = "Please enter valid address";
+                        }
+                        if(isEmpty(city)) {
+                            var errCity = "Please enter your city";
+                            }
+                        if(isEmpty(postalCode)) {
+                            var errPostalCode = "Please enter valid postal code";
+                        }
+                        if(isEmpty(phone)) {
+                            var errPhone = "Please enter valid phone number";
+                        }
+                        var contextDict = {
+                            isAdmin: isAdmin,
+                            isLogin: isLogin,
+                            userInfo: user.recordset[0],
+                            errorFullName: errFullName,
+                            errorAddress: errAddress,
+                            errorCity: errCity,
+                            errorPostalCode: errPostalCode,
+                            errorPhone: errPhone
+                        };   
+                        res.render('profiles/addressForm', contextDict);
+                    }
+                    else {
+                        const sqlInsert = 'INSERT INTO Addresses VALUES(\'' + userID + '\', \
+                                            \'' + fullName + '\', \
+                                            \'' + address1 + '\', \
+                                            \'' + address2 + '\', \
+                                            \'' + city + '\', \
+                                            \'' + province + '\', \
+                                            \'' + postalCode + '\', \
+                                            \'' + country + '\', \
+                                            \'' + phone + '\')';
+                        runQuery(sqlInsert, (result) => {
+                            runQuery('SELECT * FROM Addresses WHERE userID = \'' + userID + '\'', (address) => {
+                                return res.render('profiles/address', {isLogin, isAdmin, userInfo: user.recordset[0], address: address.recordset});
+                            })
+                        })
+                    }
                 }); 
             }        
         }
@@ -141,10 +214,8 @@ class ProfileController {
                         else {
                             var updateError = "Current password is not match, please try again.";
                             return res.render('profiles/changepassword', {isLogin, isAdmin, userInfo: user.recordset[0], updateError});
-                        }
-                        
+                        }       
                     }
-
                 }); 
             }  
         }

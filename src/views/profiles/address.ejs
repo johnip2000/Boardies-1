@@ -10,7 +10,47 @@
             <div class="block-body">
                 <div class="row">
                     <div class="col-12">
-                        <div class="mt-5"><a class="btn btn-sm btn-dark" href="/customer/address/edit">Add a New Address</a></div>
+                        <% if(address.length > 0) { %> 
+                            <% address.forEach(function(item){%>
+                                <% if(item.address2 == "") { %>
+                                    <div class="row">
+                                        <div class="col-8">
+                                            <div class="card border-light">
+                                                <div class="card-header">
+                                                    <span class="flex-grow-1 align-middle"><%=item.address1%>, <%=item.city%>, 
+                                                        <%=item.province%>, <%=item.country%>, <%=item.postalCode%></span>          
+                                                </div>
+                                            </div>  
+                                        </div>
+                                        <div class="col-4">
+                                            <a class="d-inline btn btn-lg btn-dark align-self-start ml-3" href="">Edit</a>
+                                            <form method="POST" class="d-inline">
+                                                <input class="btn btn-lg btn-danger align-self-start ml-2" type="submit" value="Delete"/>
+                                            </form>  
+                                        </div>
+                                    </div>
+                                <% } else {%> 
+                                    <div class="row">
+                                        <div class="col-8">
+                                            <div class="card border-light">
+                                                <div class="card-header">
+                                                    <span class="flex-grow-1 align-middle"><%=item.address1%>, <%=item.address2%>,
+                                                        <%=item.city%>, <%=item.province%>, <%=item.country%>, <%=item.postalCode%></span>          
+                                                </div>
+                                            </div>  
+                                        </div>
+                                        <div class="col-4">
+                                            <a class="d-inline btn btn-lg btn-dark align-self-start ml-3" href="">Edit</a>
+                                            <form method="POST" class="d-inline">
+                                                <input class="btn btn-lg btn-danger align-self-start ml-2" type="submit" value="Delete"/>
+                                            </form>  
+                                        </div>
+                                    </div>
+                                <%}%>
+                                
+                            <% }); %>      
+                        <% } %>                              
+                        <div class="mt-5"><a class="btn btn-sm btn-dark" href="/customer/address/add">Add a New Address</a></div>
                     </div>
                 </div>
             </div>  

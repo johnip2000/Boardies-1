@@ -4,57 +4,72 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-lg-8 col-xl-9 mb-5">
-                <form method="post" action="/customer/adddress/save">
+                <form method="post" action="/customer/address/add">
+                    <input type="hidden" name="userID" value="<%=userInfo.userID%>">
                     <div class="block-body">
                         <div class="row">
                             <div class="form-group col-md-6">
-                                <label for="address-firstName">First Name *</label>
-                                <input type="text" id="address-firstName" class="u-full-width form-control" name="address[firstName]" value="">
-                            </div>
-                            <div class="form-group col-md-6">
-                                <label for="address-lastName">Last Name *</label>
-                                <input type="text" id="address-lastName" class="u-full-width form-control" name="address[lastName]" value="">
+                                <label for="address-fullName">Full Name *</label>
+                                <input type="text" id="address-fullName" class="u-full-width form-control" name="fullName" value="">
+                                <% if(typeof errorFullName !== 'undefined' && errorFullName) { %>
+                                    <small id="errorFullname" class="form-text text-danger font-weight-bold"><%=errorFullName%></small>
+                                <% } %>   
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="address-address1">Address 1 *</label>
-                                <input type="text" id="address-address1" class="u-full-width form-control" name="address[address1]" value="">
+                                <input type="text" id="address-address1" class="u-full-width form-control" name="address1" value="">
+                                <% if(typeof errorAddress !== 'undefined' && errorAddress) { %>
+                                    <small id="errorAddress" class="form-text text-danger font-weight-bold"><%=errorAddress%></small>
+                                <% } %>   
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="address-address2">Address 2</label>
-                                <input type="text" id="address-address2" class="u-full-width form-control" name="address[address2]" value="">
+                                <input type="text" id="address-address2" class="u-full-width form-control" name="address2" value="">
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="address-city">City *</label>
-                                <input type="text" id="address-city" class="u-full-width form-control" name="address[city]" value="">
+                                <input type="text" id="address-city" class="u-full-width form-control" name="city" value="">
+                                <% if(typeof errorCity !== 'undefined' && errorCity) { %>
+                                    <small id="errorCity" class="form-text text-danger font-weight-bold"><%=errorCity%></small>
+                                <% } %>   
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="address-zipCode">Postal Code *</label>
-                                <input type="text" id="address-zipCode" class=" form-control" name="address[zipCode]" value="">
+                                <input type="text" id="address-zipCode" class=" form-control" name="postalCode" value="">
+                                <% if(typeof errorPostalCode !== 'undefined' && errorPostalCode) { %>
+                                    <small id="errorPostalCode" class="form-text text-danger font-weight-bold"><%=errorPostalCode%></small>
+                                <% } %>   
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="address-state">Province *</label>
-                                <select id="address-stateId" data-modelname="address" class="form-control" name="address[stateId]">
-                                    <option value="9">Alberta</option>
-                                    <option value="10">British Columbia</option>          
-                                    <option value="11">Manitoba</option>
-                                    <option value="12">New Brunswick</option>
-                                    <option value="13">Newfoundland and Labrador</option>
-                                    <option value="15">Nova Scotia</option>
-                                    <option value="17">Ontario</option>
-                                    <option value="18">Prince Edward Island</option>
-                                    <option value="19">Quebec</option>
-                                    <option value="20">Saskatchewan</option>               
-                                </select>
+                                <select id="address-state"class="form-control" name="province">
+                                    <option value="Alberta">Alberta</option>
+                                    <option value="British Columbia">British Columbia</option>          
+                                    <option value="Manitoba">Manitoba</option>
+                                    <option value="NewBrunswick">New Brunswick</option>
+                                    <option value="Newfoundland and Labrador">Newfoundland and Labrador</option>
+                                    <option value="Northwest Territories">Northwest Territories</option>
+                                    <option value="Nova Scotia">Nova Scotia</option>
+                                    <option value="Nunavut">Nunavut</option>
+                                    <option value="Ontario">Ontario</option>
+                                    <option value="Prince Edward Island">Prince Edward Island</option>
+                                    <option value="Quebec">Quebec</option>
+                                    <option value="Saskatchewan">Saskatchewan</option>     
+                                    <option value="Yukon">Yukon</option>                         
+                                </select>  
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="address-countryId">Country *</label>
-                                <select class="form-control" name="address[countryId]">
-                                    <option value="38"  selected>Canada</option>
+                                <select class="form-control" name="country">
+                                    <option value="Canada" selected>Canada</option>
                                 </select>
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="address-phone">Phone</label>
-                                <input type="text" id="address-phone" class="u-full-width form-control" name="address[phone]" value="">
+                                <input type="text" id="address-phone" class="u-full-width form-control" name="phone" value="">
+                                <% if(typeof errorPhone !== 'undefined' && errorPhone) { %>
+                                    <small id="errorPhone" class="form-text text-danger font-weight-bold"><%=errorPhone%></small>
+                                <% } %>   
                             </div>
                         </div>
                     </div>                      
