@@ -23,7 +23,7 @@
                                             </div>  
                                         </div>
                                         <div class="col-4">
-                                            <a class="d-inline btn btn-lg btn-dark align-self-start ml-3" href="">Edit</a>
+                                            <a class="d-inline btn btn-lg btn-dark align-self-start ml-3" href="/customer/address/edit?addressID=<%item.addressID%>">Edit</a>
                                             <form method="POST" class="d-inline">
                                                 <input class="btn btn-lg btn-danger align-self-start ml-2" type="submit" value="Delete"/>
                                             </form>  
@@ -40,8 +40,9 @@
                                             </div>  
                                         </div>
                                         <div class="col-4">
-                                            <a class="d-inline btn btn-lg btn-dark align-self-start ml-3" href="">Edit</a>
-                                            <form method="POST" class="d-inline">
+                                            <a class="d-inline btn btn-lg btn-dark align-self-start ml-3" href="/customer/address/edit?addressID=<%=item.addressID%>">Edit</a>
+                                            <form method="GET" class="d-inline" action='/customer/address/delete'>
+                                                <input type="hidden" name="addressID" value=<%=item.addressID%>>
                                                 <input class="btn btn-lg btn-danger align-self-start ml-2" type="submit" value="Delete"/>
                                             </form>  
                                         </div>

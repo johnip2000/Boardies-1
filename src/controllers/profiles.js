@@ -99,6 +99,26 @@ class ProfileController {
         }
     }
 
+    async getEditAddress(req, res) {
+        const isLogin = req.session.loggedin ? true : false;
+        var isAdmin = false;
+        if(isLogin == false) {
+            return res.redirect('/errors');
+        }
+        else {
+            if(req.session.username != "" && typeof(req.session.username) != 'undefined') {
+                runQuery('SELECT * FROM Users WHERE email = \'' + req.session.username + '\'', function(user) {
+                    isAdmin = user.recordset[0].isAdmin;
+                    var userID = user.recordset[0].userID;
+                    var addressID = req.query.addressID;
+                    runQuery('SELECT * FROM Addresses WHERE userID = \'' + userID + '\' AND addressID = \'' + addressID + '\'', (address) => {
+                        return res.render('profiles/editAddressForm', {isLogin, isAdmin, userInfo: user.recordset[0], address: address.recordset[0]});
+                    })
+                }); 
+            }
+        }
+    }
+
     async AddAddress(req, res) {
         const isLogin = req.session.loggedin ? true : false;
         var isAdmin = false;
@@ -150,13 +170,92 @@ class ProfileController {
                                             \'' + country + '\', \
                                             \'' + phone + '\')';
                         runQuery(sqlInsert, (result) => {
-                            runQuery('SELECT * FROM Addresses WHERE userID = \'' + userID + '\'', (address) => {
-                                return res.render('profiles/address', {isLogin, isAdmin, userInfo: user.recordset[0], address: address.recordset});
-                            })
+                            return res.redirect('/customer/address');
                         })
                     }
                 }); 
             }        
+        }
+    }
+
+    async editAddress(req, res) {
+        const isLogin = req.session.loggedin ? true : false;
+        var isAdmin = false;
+        if(isLogin == false) {
+            return res.redirect('/errors');
+        }
+        else {
+            if(req.session.username != "" && typeof(req.session.username) != 'undefined') {
+                runQuery('SELECT * FROM Users WHERE email = \'' + req.session.username + '\'', function(user) {
+                    isAdmin = user.recordset[0].isAdmin;
+                    let {userID, addressID, fullName, address1, address2, city, province, postalCode, country, phone} = req.body;
+                    if(isEmpty(fullName) || isEmpty(address1) || isEmpty(city) || isEmpty(province) || isEmpty(postalCode)
+                         || isEmpty(country) || isEmpty(phone)) {
+                        if(isEmpty(fullName)) {
+                            var errFullName = "Please enter valid name";
+                        }
+                        if(isEmpty(address1)) {
+                            var errAddress = "Please enter valid address";
+                        }
+                        if(isEmpty(city)) {
+                            var errCity = "Please enter your city";
+                            }
+                        if(isEmpty(postalCode)) {
+                            var errPostalCode = "Please enter valid postal code";
+                        }
+                        if(isEmpty(phone)) {
+                            var errPhone = "Please enter valid phone number";
+                        }
+                        var contextDict = {
+                            isAdmin: isAdmin,
+                            isLogin: isLogin,
+                            userInfo: user.recordset[0],
+                            errorFullName: errFullName,
+                            errorAddress: errAddress,
+                            errorCity: errCity,
+                            errorPostalCode: errPostalCode,
+                            errorPhone: errPhone
+                        };   
+                        res.render('profiles/addressForm', contextDict);
+                    }
+                    else {
+                        const sqlUpdate = 'UPDATE Addresses SET fullname =  \'' + fullName + '\', \
+                                            address1 = \'' + address1 + '\', \
+                                            address2 = \'' + address2 + '\', \
+                                            city =  \'' + city + '\', \
+                                            province = \'' + province + '\', \
+                                            postalCode = \'' + postalCode + '\', \
+                                            country =  \'' + country + '\', \
+                                            phone = \'' + phone + '\' \
+                                            WHERE addressID = \'' + addressID + '\' AND \
+                                            userID = \'' + userID + '\'';
+                        runQuery(sqlUpdate, (result) => {
+                            return res.redirect('/customer/address');
+                        })
+                    }
+                }); 
+            }        
+        }
+    }
+
+    async deleteAddress(req, res) {
+        const isLogin = req.session.loggedin ? true : false;
+        var isAdmin = false;
+        if(isLogin == false) {
+            return res.redirect('/errors');
+        }
+        else {
+            if(req.session.username != "" && typeof(req.session.username) != 'undefined') {
+                runQuery('SELECT * FROM Users WHERE email = \'' + req.session.username + '\'', function(user) {
+                    isAdmin = user.recordset[0].isAdmin;
+                    var userID = user.recordset[0].userID;
+                    let {addressID} = req.query;
+                    const sqlDelete = 'DELETE FROM Addresses WHERE addressID = \'' + addressID + '\' AND userID = \'' + userID + '\'';
+                    runQuery(sqlDelete, (result) => {
+                        return res.redirect('/customer/address');
+                    })     
+                }); 
+            }
         }
     }
 

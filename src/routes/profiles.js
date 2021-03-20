@@ -12,5 +12,8 @@ router
     .post('/profile/save', profileController.UpdateProfile)
     .post('/address/add', profileController.AddAddress)
     .post('/changepassword', profileController.ChangePassword)
+    .get('/address/delete', profileController.deleteAddress)
+    .put('/address/save', profileController.editAddress)
+    .get('/address/edit', profileController.getEditAddress)
 
 module.exports = router;
