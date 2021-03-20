@@ -98,12 +98,12 @@ class GamesController {
         var isAdmin = false;
         if(req.session.username != "" && typeof(req.session.username) != 'undefined') {
             var email = req.session.username;
-            runQuery("SELECT * FROM Users WHERE email = \'' + email + '\'", function(user) {
+            runQuery('SELECT * FROM Users WHERE email = \'' + email + '\'', function(user) {
                 isAdmin = user.recordset[0].isAdmin;
             }); 
         }
         var productid = req.param('productID');
-        runQuery("SELECT * FROM Products WHERE productID =" + productid, function(result) {
+        runQuery('SELECT * FROM Products WHERE productID =' + productid, function(result) {
             return res.render('games/gameDetails', {listGame: result.recordset, isLogin, isAdmin});
         });           
     }
