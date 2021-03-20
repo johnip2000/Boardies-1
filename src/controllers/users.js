@@ -21,15 +21,12 @@ class UserController {
                         req.session.username = user.recordset[0].userName;
                         runQuery('SELECT TOP(10) * FROM Products', function(result) {
                             runQuery('SELECT * FROM Categories', function(listCategories) {
-                                var contextDict = {
-                                    currentUrl: '/',
-                                    title: 'Home',
-                                    Categories: listCategories.recordset,
-                                    listGame: result.recordset,
-                                    isAdmin: user.recordset[0].isAdmin,
-                                    isLogin: true
-                                };
-                                return res.render('pages/homepage', contextDict);
+                                if(user.recordset[0].isAdmin) {
+                                    return res.redirect('/admin');
+                                }
+                                else {
+                                    return res.redirect('/');
+                                }
                             });
                         });            
                     }
@@ -85,15 +82,7 @@ class UserController {
                     req.session.username = emailNew;
                     runQuery('SELECT TOP(10) * FROM Products', function(result) {
                         runQuery('SELECT * FROM Categories', function(listCategories) {
-                            var contextDict = {
-                                currentUrl: '/',
-                                title: 'Home',
-                                Categories: listCategories.recordset,
-                                listGame: result.recordset,
-                                isAdmin: false,
-                                isLogin: true
-                            };
-                            return res.render('pages/homepage', contextDict);
+                            return res.redirect('/');
                         });
                     });       
                 })
