@@ -75,6 +75,20 @@ class HomeController {
         return res.render('pages/shipping-info',{isLogin, isAdmin});
     }
 
+    async SearchProduct(req, res) {
+        const isLogin = req.session.loggedin ? true : false;
+        var isAdmin = false;
+        if(req.session.username != "" && typeof(req.session.username) != 'undefined') {
+            runQuery('SELECT * FROM Users WHERE email = \'' + req.session.username + '\'', function(user) {
+                isAdmin = user.recordset[0].isAdmin;
+            }); 
+        }
+        const sqlQuery = 'SELECT * FROM Products WHERE productName LIKE \'%' + req.query.keyword + '%\'';
+        runQuery(sqlQuery, (result) => {
+            return res.render('games/gameSearch',{isLogin, isAdmin, listGame: result.recordset});
+        })
+    }
+
     async Error(req, res) {
         return res.render('pages/errors');
     }

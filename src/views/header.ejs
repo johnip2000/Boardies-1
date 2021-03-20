@@ -59,8 +59,8 @@
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item" href="/games/Child">Child</a>
                                 <a class="dropdown-item" href="/games/Family">Family</a>
-                                <a class="dropdown-item" href="/games/StrategyLight">Strategy Light</a>
-                                <a class="dropdown-item" href="/games/StrategyAdvanced">Strategy Advanced</a>
+                                <a class="dropdown-item" href="/games/Strategy%20Light">Strategy Light</a>
+                                <a class="dropdown-item" href="/games/Strategy%20Advanced">Strategy Advanced</a>
                                 <a class="dropdown-item" href="/games/Wargames">Wargames</a>
                                 <a class="dropdown-item" href="/games/Adventures">Adventures</a>
                             </div>
@@ -79,8 +79,8 @@
                             </div>
                         </li>
                     </ul>
-                    <form class="form-inline my-2 my-lg-0">
-                        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                    <form class="form-inline my-2 my-lg-0" method="GET" action="/search">
+                        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="keyword">
                         <button class="btn btn-outline-dark my-2 my-sm-0" type="submit">Search</button>
                     </form>
                     <% if(isLogin == true) {  %> 
