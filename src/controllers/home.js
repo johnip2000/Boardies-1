@@ -106,6 +106,7 @@ class HomeController {
                 isAdmin = user.recordset[0].isAdmin;
             }); 
         }
+        
         return res.render('pages/cart', {isLogin, isAdmin});
     }
 }
