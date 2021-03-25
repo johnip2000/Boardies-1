@@ -72,11 +72,18 @@
                         <td><%=item.phone%></td>
                         <td><%=item.userName%></td>
                         <td class="float-right">
-                          <a href="/admin/products/details?productID=<%=item.productID%>" class="btn btn-info rounded"><i class="fas fa-info-circle"></i> Details</a> 
+                          <a href="/admin/customers/details?customerID=<%=item.userID%>" class="btn btn-info rounded"><i class="fas fa-info-circle"></i> Details</a> 
                           <%if(item.blocked == false) { %>
-                            <a href="/admin/products/blocked?productID=<%=item.productID%>" class="btn btn-danger rounded ml-2"><i class="fas fa-lock"></i> Block User</a> 
+                            <form class="form-group d-inline" method="post" action="/admin/customers/blocked?_method=PUT">
+                              <input type="hidden" name="customerID" value=<%=item.userID%>>
+                              <button type="submit" class="btn btn-danger rounded ml-2"><i class="fas fa-lock"></i> Block User</button> 
+                            </form>
+                            
                           <%} else {%>
-                            <a href="/admin/products/unblocked?productID=<%=item.productID%>" class="btn btn-danger rounded ml-2"><i class="fas fa-unlock-alt"></i> Unlock User</a> 
+                            <form class="form-group d-inline" method="post" action="/admin/customers/unblocked?_method=PUT">
+                              <input type="hidden" name="customerID" value=<%=item.userID%>>
+                              <button type="submit" class="btn btn-danger rounded ml-2"><i class="fas fa-unlock-alt"></i> Unlock User</button> 
+                            </form>
                           <%}%>
                         </td>   
                       </tr>
