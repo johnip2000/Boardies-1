@@ -8,6 +8,7 @@ router
     .get('/', adminController.Index)
     .get('/orders', adminController.Orders)
     .get('/products', adminController.Products)
+    .get('/products/details', adminController.ProductDetail)
     .get('/products/add', adminController.newProductForm)
     .get('/products/edit', adminController.EditProductForm)
     .get('/products/delete', adminController.DeleteProduct)
