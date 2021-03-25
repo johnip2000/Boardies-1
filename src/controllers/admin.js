@@ -1,8 +1,5 @@
 const db = require('../config/database');
 const runQuery = db.runQuery;
-const fs = require('fs');
-const { DH_NOT_SUITABLE_GENERATOR } = require('constants');
-const { render } = require('ejs');
 
 class AdminController {
     async Index(req, res) {
@@ -217,6 +214,24 @@ class AdminController {
             }); 
         } 
     }
+
+    async ProductDetail(req, res) {
+        const isLogin = req.session.loggedin ? true : false;
+        var isAdmin = false;
+        if(req.session.username != "" && typeof(req.session.username) != 'undefined') {
+            runQuery('SELECT * FROM Users WHERE email = \'' + req.session.username + '\'', function(user) {
+                isAdmin = user.recordset[0].isAdmin;
+                if(isLogin && isAdmin) {
+                    runQuery('SELECT * FROM Products WHERE productID = \'' + req.query.productID + '\'', (products) => {
+                        res.render('admin/productDetail', {product: products.recordset[0], productID: req.query.productID})
+                    })   
+                }
+                else {           
+                    return res.render('pages/errors');
+                }
+            }); 
+        }
+    } 
 
     async Customers(req, res) {
         const isLogin = req.session.loggedin ? true : false;
