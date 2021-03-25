@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="icon" href="/docs/4.1/assets/img/favicons/favicon.ico">
-    <title>Boardies - Admin</title>
+    <title>Product Inventory</title>
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <!-- Custom styles for this template -->
@@ -49,9 +49,10 @@
         </nav>
 
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
-          <h2 class="d-inline float-left mt-4">Section title</h2>
+          <h2 class="d-inline float-left mt-4">All Products</h2>
           <a href="/admin/products/add" class="d-inline float-right btn btn-primary rounded mt-4 text-light"><i class="fas fa-plus-circle"></i> Add New Product</a>
           <div class="table-responsive">
+            <p id="updateMessage" class="form-text text-success font-weight-bold text-center mt-2">Update Suce</p>
             <table class="table  table-hover">
               <thead class="thead-light">
                 <tr>
@@ -65,21 +66,21 @@
                 </tr>
               </thead>
               <tbody>
-                <% products.forEach(function(item){%>
+                <% for(var i=0; i < products.length; i++) { %>
                     <tr>
-                        <td><%=item.productID%></td>
-                        <td><%=item.productName%> </td>
-                        <td><%=item.categoryID%></td>
-                        <td><%=item.productPrice.toFixed(2)%></td>
-                        <td><%=item.unitsInStock%></td>
-                        <td><%=item.manufactureYear%></td>
+                        <td><%=products[i].productID%></td>
+                        <td><%=products[i].productName%> </td>
+                        <td><%=categories[i].categoryName%></td>
+                        <td><%=products[i].productPrice.toFixed(2)%></td>
+                        <td><%=products[i].unitsInStock%></td>
+                        <td><%=products[i].manufactureYear%></td>
                         <td class="float-right">
-                          <a href="/admin/products/details?productID=<%=item.productID%>" class="btn btn-info rounded"><i class="fas fa-info-circle"></i> Details</a> 
-                          <a href="/admin/products/edit?productID=<%=item.productID%>" class="btn btn-success rounded ml-2"><i class="fas fa-edit"></i> Edit</a> 
-                          <a href="/admin/products/delete?productID=<%=item.productID%>" class="btn btn-danger rounded ml-2"><i class="fas fa-trash-alt"></i> Delete</a> 
+                          <a href="/admin/products/details?productID=<%=products[i].productID%>" class="btn btn-info rounded"><i class="fas fa-info-circle"></i> Details</a> 
+                          <a href="/admin/products/edit?productID=<%=products[i].productID%>" class="btn btn-success rounded ml-2"><i class="fas fa-edit"></i> Edit</a> 
+                          <a href="/admin/products/delete?productID=<%=products[i].productID%>" class="btn btn-danger rounded ml-2"><i class="fas fa-trash-alt"></i> Delete</a> 
                         </td>   
                       </tr>
-                <% }); %>   
+                <% }; %>   
               </tbody>
             </table>
           </div>
