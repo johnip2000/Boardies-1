@@ -13,7 +13,10 @@ router
     .get('/products/edit', adminController.EditProductForm)
     .get('/products/delete', adminController.DeleteProduct)
     .get('/customers', adminController.Customers)
+    .get('/customers/details', adminController.CustomerDetail)
     .post('/products/add', adminController.AddProduct)
     .put('/products/save', adminController.EditProduct)
+    .put('/customers/blocked', adminController.Blocked)
+    .put('/customers/unblocked', adminController.Unblocked)
 
 module.exports = router;

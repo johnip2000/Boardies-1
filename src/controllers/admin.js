@@ -223,7 +223,7 @@ class AdminController {
                 isAdmin = user.recordset[0].isAdmin;
                 if(isLogin && isAdmin) {
                     runQuery('SELECT * FROM Products WHERE productID = \'' + req.query.productID + '\'', (products) => {
-                        res.render('admin/productDetail', {product: products.recordset[0], productID: req.query.productID})
+                        res.render('admin/productDetail', {product: products.recordset[0]})
                     })   
                 }
                 else {           
@@ -249,6 +249,62 @@ class AdminController {
                 }
             }); 
         }    
+    }
+
+    async CustomerDetail(req, res) {
+        const isLogin = req.session.loggedin ? true : false;
+        var isAdmin = false;
+        if(req.session.username != "" && typeof(req.session.username) != 'undefined') {
+            runQuery('SELECT * FROM Users WHERE email = \'' + req.session.username + '\'', function(user) {
+                isAdmin = user.recordset[0].isAdmin;
+                if(isLogin && isAdmin) {
+                    runQuery('SELECT * FROM Users WHERE userID = \'' + req.query.customerID + '\'', (customers) => {
+                        res.render('admin/customerDetail', {customer: customers.recordset[0]})
+                    })   
+                }
+                else {           
+                    return res.render('pages/errors');
+                }
+            }); 
+        }
+    }
+
+    async Blocked(req, res) {
+        const isLogin = req.session.loggedin ? true : false;
+        var isAdmin = false;
+        if(req.session.username != "" && typeof(req.session.username) != 'undefined') {
+            runQuery('SELECT * FROM Users WHERE email = \'' + req.session.username + '\'', function(user) {
+                isAdmin = user.recordset[0].isAdmin;
+                if(isLogin && isAdmin) {
+                    const sqlUpdate = 'UPDATE Users SET blocked = \'' + true + '\' WHERE userID = \'' + req.body.customerID + '\'';
+                    runQuery(sqlUpdate, (result) => {
+                        return res.redirect('/admin/customers');
+                    })
+                }
+                else {
+                    return res.render('pages/errors');
+                }
+            }); 
+        } 
+    }
+
+    async Unblocked(req, res) {
+        const isLogin = req.session.loggedin ? true : false;
+        var isAdmin = false;
+        if(req.session.username != "" && typeof(req.session.username) != 'undefined') {
+            runQuery('SELECT * FROM Users WHERE email = \'' + req.session.username + '\'', function(user) {
+                isAdmin = user.recordset[0].isAdmin;
+                if(isLogin && isAdmin) {
+                    const sqlUpdate = 'UPDATE Users SET blocked = \'' + false + '\' WHERE userID = \'' + req.body.customerID + '\'';
+                    runQuery(sqlUpdate, (result) => {
+                        return res.redirect('/admin/customers');
+                    })
+                }
+                else {
+                    return res.render('pages/errors');
+                }
+            }); 
+        } 
     }
 
     async Orders(req, res) {
