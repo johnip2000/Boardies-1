@@ -17,18 +17,27 @@ class UserController {
             runQuery('SELECT * FROM Users WHERE email = \'' + email + '\'', function(user){
                 if(user.recordset.length > 0) {
                     if(user.recordset && bcrypt.compareSync(password, user.recordset[0].userPassword)) {
-                        req.session.loggedin = true;
-                        req.session.username = user.recordset[0].userName;
-                        runQuery('SELECT TOP(10) * FROM Products', function(result) {
-                            runQuery('SELECT * FROM Categories', function(listCategories) {
-                                if(user.recordset[0].isAdmin) {
-                                    return res.redirect('/admin');
-                                }
-                                else {
-                                    return res.redirect('/');
-                                }
-                            });
-                        });            
+                        if(user.recordset[0].blocked == true) {
+                            return res.render('pages/login', {
+                                signInError: "Your account has been blocked, please contact customer service for further support.",
+                                isAdmin: false,
+                                isLogin: false
+                            });  
+                        }
+                        else {
+                            req.session.loggedin = true;
+                            req.session.username = user.recordset[0].userName;
+                            runQuery('SELECT TOP(10) * FROM Products', function(result) {
+                                runQuery('SELECT * FROM Categories', function(listCategories) {
+                                    if(user.recordset[0].isAdmin) {
+                                        return res.redirect('/admin');
+                                    }
+                                    else {
+                                        return res.redirect('/');
+                                    }
+                                });
+                            });        
+                        }       
                     }
                     else {
                         return res.render('pages/login', {
