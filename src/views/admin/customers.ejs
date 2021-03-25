@@ -73,7 +73,11 @@
                         <td><%=item.userName%></td>
                         <td class="float-right">
                           <a href="/admin/products/details?productID=<%=item.productID%>" class="btn btn-info rounded"><i class="fas fa-info-circle"></i> Details</a> 
-                          <a href="/admin/products/delete?productID=<%=item.productID%>" class="btn btn-danger rounded ml-2"><i class="fas fa-ban"></i> Block User</a> 
+                          <%if(item.blocked == false) { %>
+                            <a href="/admin/products/blocked?productID=<%=item.productID%>" class="btn btn-danger rounded ml-2"><i class="fas fa-lock"></i> Block User</a> 
+                          <%} else {%>
+                            <a href="/admin/products/unblocked?productID=<%=item.productID%>" class="btn btn-danger rounded ml-2"><i class="fas fa-unlock-alt"></i> Unlock User</a> 
+                          <%}%>
                         </td>   
                       </tr>
                 <% }); %>   
