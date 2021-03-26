@@ -101,13 +101,73 @@ class HomeController {
     async Cart(req, res) {
         const isLogin = req.session.loggedin ? true : false;
         var isAdmin = false;
-        if(req.session.username != "" && typeof(req.session.username) != 'undefined') {
-            runQuery('SELECT * FROM Users WHERE email = \'' + req.session.username + '\'', function(user) {
+        if (req.session.username != "" && typeof (req.session.username) != 'undefined') {
+            runQuery('SELECT * FROM Users WHERE email = \'' + req.session.username + '\'', function (user) {
                 isAdmin = user.recordset[0].isAdmin;
-            }); 
+            });
         }
-        
-        return res.render('pages/cart', {isLogin, isAdmin});
+        if (isLogin == false) {
+            return res.redirect('/login');
+        } else {
+
+            //console.log(isLogin);
+            //console.log(req.session.username);
+            //console.log(req.query.productID);
+            var productbb = req.query.productID;
+            var TotalPrice = 0;
+            //console.log(productbb);
+            if (productbb != null) {
+                runQuery('SELECT * FROM Products p INNER JOIN Categories c ON p.categoryID = c.categoryID WHERE productID = \'' + productbb + '\'', function (result) {
+                    var insertcartproductpic = result.recordset[0].productImage;
+                    var insertcartproductprice = result.recordset[0].productPrice;
+                    var insertcartproduct = result.recordset[0].productName;
+                    var insertcartprodcat = result.recordset[0].categoryName;
+
+                    //console.log(insertcartproductpic);
+
+
+                    var insertquery = "INSERT INTO Cart(ProductID,ProductName, Price, CartProductImage, ProductCate, CartProductQuantity, UserEmail) VALUES ('" + productbb + "', '" + insertcartproduct + "', '" + insertcartproductprice + "', '" + insertcartproductpic + "', '" + insertcartprodcat + "', 1 , '" + req.session.username + "')";
+
+                    runQuery(insertquery, function (result) {
+                        runQuery('SELECT * FROM Cart WHERE UserEmail = \'' + req.session.username + '\'', function (result) {
+                            for (var i = 0; i < result.recordset.length; i++) {
+                                //console.log(result.recordset[i].Price);
+                                TotalPrice = TotalPrice + result.recordset[i].Price;
+                            }
+                            //console.log(TotalPrice);
+                            return res.render('pages/cart', {
+                                listCart: result.recordset,
+                                isLogin,
+                                isAdmin,
+                                Subtotal: TotalPrice
+                            });
+                        });
+                    });
+                });
+            } else {
+                runQuery('SELECT * FROM Cart WHERE UserEmail = \'' + req.session.username + '\'', function (result) {
+                    for (var i = 0; i < result.recordset.length; i++) {
+                        //console.log(result.recordset[i].Price);
+                        TotalPrice = TotalPrice + result.recordset[i].Price;
+                    }
+                    //console.log(TotalPrice);
+                    return res.render('pages/cart', {
+                        listCart: result.recordset,
+                        isLogin,
+                        isAdmin,
+                        Subtotal: TotalPrice
+                    });
+                });
+            }
+        }
+    }
+    async Remove(req, res) {
+
+        var RemoveProduct = req.query.CartID;
+        //console.log(RemoveProduct);
+        runQuery('DELETE FROM Cart WHERE CartID =  \'' + RemoveProduct + '\'', function (result) {
+            return res.redirect('/cart');
+        });
     }
 }
 
