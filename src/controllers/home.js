@@ -232,7 +232,7 @@ class HomeController {
                             });
                         }else {
                             return res.render('pages/cart', {
-                                Warning: "You select duplicate items.",
+                                Warning: "The items has been added into the cart.",
                                 listCart: result.recordset,
                                 isLogin,
                                 isAdmin,
