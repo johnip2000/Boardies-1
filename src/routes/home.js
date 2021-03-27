@@ -12,6 +12,7 @@ router
     .get('/login', homeController.Login)
     .get('/shipping-info', homeController.ShippingInfo)
     .get('/cart', homeController.Cart)
+    .post('/cart', homeController.AddtoCart)
     .get('/remove', homeController.Remove)
     .get('/search', homeController.SearchProduct)
     .get('/errors', homeController.Error)

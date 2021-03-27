@@ -15,8 +15,11 @@
                         <div class="price text-success text-center"><h3>$<%=item.productPrice%></h3></div>
                     </div>
                     <div class="card-body">
-                        <a href="/games/gameDetails?productID=<%=item.productID%>" class="btn btn-info mr-3"> View Product</a>
-                        <a href="/cart?productID=<%=item.productID%>" class="btn btn-danger"><i class="fas fa-shopping-cart"></i> Add to Cart</a>
+                        <form action="/cart" method="post">
+                            <a href="/games/gameDetails?productID=<%=item.productID%>" class="btn btn-info mr-3"> View Product</a>
+                            <input type=text name="buyitem" value="<%=item.productID%>" hidden>
+                            <button type="submit" class="btn btn-danger"><i class="fas fa-shopping-cart"></i> Add to Cart</button>
+                        </form>
                     </div>
                 </div>
             </div>
