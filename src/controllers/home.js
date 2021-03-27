@@ -2,7 +2,6 @@ const MailMessage = require('nodemailer/lib/mailer/mail-message');
 const db = require('../config/database');
 const runQuery = db.runQuery;
 const mail = require('../mail');
-const guid = require('guid');
 
 class HomeController {
     async Index(req, res) {
