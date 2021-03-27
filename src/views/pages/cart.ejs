@@ -33,9 +33,9 @@
                 </div>
               </div>
             </th>
-            <td class="border-0 align-middle"><strong><%=item.Price%></strong></td>
-            <td class="border-0 align-middle"><strong><%=item.CartProductQuantity%></strong></td>
-            <td class="border-0 align-middle"><a href="/remove?CartID=<%=item.CartID%>" class="text-dark"><i class="fa fa-trash"></i></a></td>
+            <td class="border-0 align-middle"><strong><%=item.Price.toFixed(2)%></strong></td>
+            <td class="border-0 align-middle"><strong class="ml-4"><%=item.CartProductQuantity%></strong></td>
+            <td class="border-0 align-middle"><a href="/remove?CartID=<%=item.CartID%>" class="text-dark"><i class="fa fa-trash ml-4"></i></a></td>
           </tr>
           </tbody>
           <%});%>

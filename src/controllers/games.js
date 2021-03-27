@@ -102,7 +102,7 @@ class GamesController {
                 isAdmin = user.recordset[0].isAdmin;
             });
         }
-        var productid = req.param('productID');
+        var productid = req.query.productID;
         runQuery("SELECT * FROM Products WHERE productID =" + productid, function(result) {
             return res.render('games/gameDetails', {listGame: result.recordset, isLogin, isAdmin});
         });
