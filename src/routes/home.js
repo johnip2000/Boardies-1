@@ -14,6 +14,8 @@ router
     .get('/cart', homeController.Cart)
     .post('/cart', homeController.AddtoCart)
     .get('/remove', homeController.Remove)
+    .get('/minusitem',homeController.Minusitem)
+    .get('/additem',homeController.Additem)
     .get('/search', homeController.SearchProduct)
     .get('/errors', homeController.Error)
 

@@ -35,8 +35,8 @@
               </div>
             </th>
             <td class="border-0 align-middle"><strong><%=item.Price%></strong></td>
-            <td class="border-0 align-middle"><strong><%=item.CartProductQuantity%></strong></td>
-            <td class="border-0 align-middle"><a href="/remove?CartID=<%=item.CartID%>" class="text-dark"><i class="fa fa-trash"></i></a></td>
+            <td class="border-0 align-middle"><a href="/minusitem?CartID=<%=item.CartID%>" class="text-dark"><i class="fa fa-minus-square fa-lg"></i></a> <strong><%=item.CartProductQuantity%></strong><a href="/additem?CartID=<%=item.CartID%>" class="text-dark"> <i class="fa fa-plus-square fa-lg"></i></a></td>
+            <td class="border-0 align-middle"><a href="/remove?CartID=<%=item.CartID%>" class="text-dark"><i class="fa fa-trash fa-lg"></i></a></td>
           </tr>
           </tbody>
           <%});%>

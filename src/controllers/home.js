@@ -2,6 +2,7 @@ const MailMessage = require('nodemailer/lib/mailer/mail-message');
 const db = require('../config/database');
 const runQuery = db.runQuery;
 const mail = require('../mail');
+const guid = require('guid');
 
 class HomeController {
     async Index(req, res) {
@@ -136,7 +137,7 @@ class HomeController {
                         runQuery('SELECT * FROM Cart WHERE UserEmail = \'' + req.session.username + '\'', function (result) {
                             for (var i = 0; i < result.recordset.length; i++) {
                                 //console.log(result.recordset[i].Price);
-                                TotalPrice = TotalPrice + result.recordset[i].Price;
+                                TotalPrice = TotalPrice + result.recordset[i].Price * result.recordset[i].CartProductQuantity;
                             }
                             //console.log(TotalPrice);
                             return res.render('pages/cart', {
@@ -153,7 +154,7 @@ class HomeController {
                 runQuery('SELECT * FROM Cart WHERE UserEmail = \'' + req.session.username + '\'', function (result) {
                     for (var i = 0; i < result.recordset.length; i++) {
                         //console.log(result.recordset[i].Price);
-                        TotalPrice = TotalPrice + result.recordset[i].Price;
+                        TotalPrice = TotalPrice + result.recordset[i].Price * result.recordset[i].CartProductQuantity;
                     }
                     //console.log(TotalPrice);
                     return res.render('pages/cart', {
@@ -191,7 +192,9 @@ class HomeController {
             var productbb = req.body.buyitem;
             var TotalPrice = 0;
             var duplicate = false;
+            var duplicateID = 0;
             //console.log(productbb);
+
             if (productbb != null) {
                 runQuery('SELECT * FROM Products p INNER JOIN Categories c ON p.categoryID = c.categoryID WHERE productID = \'' + productbb + '\'', function (result) {
                     var insertcartproductpic = result.recordset[0].productImage;
@@ -206,6 +209,8 @@ class HomeController {
                             //console.log(result.recordset[i].Price);
                             if (result.recordset[i].ProductID == productbb) {
                                 duplicate = true;
+                                duplicateID=result.recordset[i].CartID
+                                //console.log(result.recordset[i].CartID);
                             }
                         }
                         //console.log(duplicate);
@@ -217,7 +222,7 @@ class HomeController {
                                 runQuery('SELECT * FROM Cart WHERE UserEmail = \'' + req.session.username + '\'', function (result) {
                                     for (var i = 0; i < result.recordset.length; i++) {
                                         //console.log(result.recordset[i].Price);
-                                        TotalPrice = TotalPrice + result.recordset[i].Price;
+                                        TotalPrice = TotalPrice + result.recordset[i].Price * result.recordset[i].CartProductQuantity;
                                     }
                                     //console.log(TotalPrice);
                                     return res.render('pages/cart', {
@@ -227,16 +232,27 @@ class HomeController {
                                         isAdmin,
                                         Subtotal: TotalPrice
                                     });
-                                    delete req.body.buyitem;
                                 });
                             });
                         }else {
-                            return res.render('pages/cart', {
-                                Warning: "The items has been added into the cart.",
-                                listCart: result.recordset,
-                                isLogin,
-                                isAdmin,
-                                Subtotal: TotalPrice
+                            //var insertquery = "INSERT INTO Cart(ProductID,ProductName, Price, CartProductImage, ProductCate, CartProductQuantity, UserEmail) VALUES ('" + productbb + "', '" + insertcartproduct + "', '" + insertcartproductprice + "', '" + insertcartproductpic + "', '" + insertcartprodcat + "', 1 , '" + req.session.username + "')";
+                            var updatequery = 'UPDATE Cart SET CartProductQuantity = CartProductQuantity + 1 WHERE CartID = \'' + duplicateID + '\'';
+
+                            runQuery(updatequery, function (result) {
+                                runQuery('SELECT * FROM Cart WHERE UserEmail = \'' + req.session.username + '\'', function (result) {
+                                    for (var i = 0; i < result.recordset.length; i++) {
+                                        //console.log(result.recordset[i].Price);
+                                        TotalPrice = TotalPrice + result.recordset[i].Price * result.recordset[i].CartProductQuantity;
+                                    }
+                                    //console.log(TotalPrice);
+                                    return res.render('pages/cart', {
+                                        Warning: null,
+                                        listCart: result.recordset,
+                                        isLogin,
+                                        isAdmin,
+                                        Subtotal: TotalPrice
+                                    });
+                                });
                             });
                         }
                     });
@@ -245,7 +261,7 @@ class HomeController {
                 runQuery('SELECT * FROM Cart WHERE UserEmail = \'' + req.session.username + '\'', function (result) {
                     for (var i = 0; i < result.recordset.length; i++) {
                         //console.log(result.recordset[i].Price);
-                        TotalPrice = TotalPrice + result.recordset[i].Price;
+                        TotalPrice = TotalPrice + result.recordset[i].Price * result.recordset[i].CartProductQuantity;
                     }
                     //console.log(TotalPrice);
                     return res.render('pages/cart', {
@@ -258,6 +274,33 @@ class HomeController {
                 });
             }
         }
+    }
+
+    async Minusitem(req, res) {
+
+        var minusitem = req.query.CartID;
+        //console.log(minusitem);
+        runQuery('UPDATE Cart SET CartProductQuantity = CartProductQuantity - 1 WHERE CartID = \'' + minusitem + '\'', function (result) {
+            runQuery('SELECT * FROM Cart WHERE CartID = \'' + minusitem + '\'' , function(result){
+                //console.log(result.recordset[0].CartProductQuantity);
+                if(result.recordset[0].CartProductQuantity == 0){
+                    runQuery('DELETE FROM Cart WHERE CartID =  \'' + minusitem + '\'',function (result){
+                        return res.redirect('/cart');
+                    });
+                }else{
+                    return res.redirect('/cart');
+                }
+            });
+        });
+    }
+
+    async Additem(req, res) {
+
+        var additem = req.query.CartID;
+        runQuery('UPDATE Cart SET CartProductQuantity = CartProductQuantity + 1 WHERE CartID = \'' + additem + '\'', function (result) {
+
+            return res.redirect('/cart');
+        });
     }
 }
 
