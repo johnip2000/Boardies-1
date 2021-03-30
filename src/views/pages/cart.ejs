@@ -34,9 +34,9 @@
                 </div>
               </div>
             </th>
-            <td class="border-0 align-middle"><strong><%=item.Price%></strong></td>
-            <td class="border-0 align-middle"><a href="/minusitem?CartID=<%=item.CartID%>" class="text-dark"><i class="fa fa-minus-square fa-lg"></i></a> <strong><%=item.CartProductQuantity%></strong><a href="/additem?CartID=<%=item.CartID%>" class="text-dark"> <i class="fa fa-plus-square fa-lg"></i></a></td>
-            <td class="border-0 align-middle"><a href="/remove?CartID=<%=item.CartID%>" class="text-dark"><i class="fa fa-trash fa-lg"></i></a></td>
+            <td class="border-0 align-middle"><strong><%=item.Price.toFixed(2)%></strong></td>
+            <td class="border-0 align-middle"><a href="/minusitem?CartID=<%=item.CartID%>" class="text-dark ml-2"><i class="fa fa-minus-square fa-lg"></i></a> <strong><%=item.CartProductQuantity%></strong><a href="/additem?CartID=<%=item.CartID%>" class="text-dark"> <i class="fa fa-plus-square fa-lg"></i></a></td>
+            <td class="border-0 align-middle"><a href="/remove?CartID=<%=item.CartID%>" class="text-dark"><i class="fa fa-trash fa-lg ml-3"></i></a></td>
           </tr>
           </tbody>
           <%});%>
@@ -69,11 +69,11 @@
       <div class="p-4">
         <p class="font-italic">Shipping and additional costs are calculated based on values you have entered.</p>
         <ul class="list-unstyled mb-4">
-          <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Order Subtotal </strong><strong>$<%=Subtotal%></strong></li>
+          <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Order Subtotal </strong><strong>$<%=Subtotal.toFixed(2)%></strong></li>
           <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Shipping and handling</strong><strong>$00.00</strong></li>
           <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Tax</strong><strong>$00.00</strong></li>
           <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Total</strong>
-            <h5 class="font-weight-bold">$<%=Subtotal%></h5>
+            <h5 class="font-weight-bold">$<%=Subtotal.toFixed(2)%></h5>
           </li>
         </ul><a href="#" class="btn btn-dark rounded-pill py-2 btn-block">Procceed to checkout</a>
       </div>
