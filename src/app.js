@@ -9,7 +9,7 @@ var GamesRouter = require('./routes/games');
 var UsersRouter = require('./routes/users');
 var ProfilesRouter = require('./routes/profiles');
 var AdminRouter = require('./routes/admin');
-
+var CheckoutRouter = require('./routes/checkout');
 
 let app = express();
 
@@ -83,6 +83,7 @@ app.use('/games', GamesRouter);
 app.use('/', UsersRouter);
 app.use('/customer', ProfilesRouter);
 app.use('/admin', AdminRouter);
+app.use('/checkout', CheckoutRouter);
 
 module.exports = app;
 

@@ -162,4 +162,13 @@
 	border-color: #e9ecef
 }
 
+/** ORDER SUMMARY */
+.order-summary {
+  font-size: 120%;
+	text-align: left;
+	background: #f8f9fa;
+  padding: .5em;
+  font-weight: bold;
+}
+
 
