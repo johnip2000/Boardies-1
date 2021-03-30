@@ -1,0 +1,147 @@
+<%- include('../header'); -%>
+
+<div class="mb-auto">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 col-xl-8">
+                <div class="block mb-5 mt-5">
+                    <div class="col-12 bg-light">
+                        <ul class="nav nav-pills mb-4 nav-fill bg-light">                              
+                            <li class="nav-item"><a href="/checkout/addresses" class="nav-link text-sm">ADDRESSES</a></li>
+                            <li class="nav-item"><a href="/checkout/shipping" class="nav-link text-sm bg-secondary text-white">SHIPPING & PAYMENT</a></li>
+                            <li class="nav-item"><a href="/checkout/review" class="nav-link text-sm">REVIEW</a></li>
+                        </ul>
+                    </div>
+                    <div class="block-header"><strong class="text-uppercase">SHIPPING METHOD & PAYMENT</strong></div>
+                        <div class="block-body mt-4">
+                            <form method="post">
+                                <div class="block">
+                                    <div class="address-fieldset ShippingAddress">
+                                    <div class="block-body">
+                                        <div class="row">
+                                            <div id="shippingAddressGroup" class="col-12">
+                                                <div class="card border-light">
+                                                    <div class="card-header">
+                                                        <div class="custom-control custom-radio">
+                                                            <input type="radio" id="shippingAddress" name="shippingAddressId"
+                                                                value="31377" class="custom-control-input"/>
+                                                            <label class="flex-grow-1 custom-control-label align-middle" for="shippingAddress">FREE SHIPPING (3-5 business days)</label>
+                                                        </div>    
+                                                    </div>
+                                                </div>  
+                                            </div>
+                                            <div id="shippingAddressGroup" class="col-12">
+                                                <div class="card border-light">
+                                                    <div class="card-header">
+                                                        <div class="custom-control custom-radio">
+                                                            <input type="radio" id="shippingAddresss" name="shippingAddressId"
+                                                                value="31378" class="custom-control-input"/>
+                                                            <label class="flex-grow-1 custom-control-label align-middle" for="shippingAddresss">EXPRESS SHIPPING (1-2 business days)</label>
+                                                        </div>    
+                                                        <medium class="ml-4">$4.99</medium>    
+                                                    </div>
+                                                </div>  
+                                            </div>
+                                        </div>
+                                    </div>
+                                    </div>
+                                </div>
+                                <div class="block mt-4">
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <div class="card ">
+                                                    <div class="card-header">
+                                                        <div class="bg-white shadow-sm">
+                                                            <!-- Credit card form tabs -->
+                                                            <ul role="tablist" class="nav bg-light nav-pills rounded nav-fill mb-3">
+                                                                <li class="nav-item"> <a data-toggle="pill" href="#credit-card" class="nav-link active "> <i class="fas fa-credit-card mr-2"></i> Credit Card </a> </li>
+                                                                <li class="nav-item"> <a data-toggle="pill" href="#paypal" class="nav-link "> <i class="fab fa-paypal mr-2"></i> Paypal </a> </li>
+                                                            </ul>
+                                                        </div> <!-- End -->
+                                                        <!-- Credit card form content -->
+                                                        <div class="tab-content">
+                                                            <!-- credit card info-->
+                                                            <div id="credit-card" class="tab-pane fade show active pt-3">
+                                                                    <div class="form-group"> <label for="username">
+                                                                            <h6>Card Owner</h6>
+                                                                        </label> <input type="text" name="username" placeholder="Card Owner Name" required class="form-control "> </div>
+                                                                    <div class="form-group"> <label for="cardNumber">
+                                                                            <h6>Card number</h6>
+                                                                        </label>
+                                                                        <div class="input-group"> <input type="text" name="cardNumber" placeholder="Valid card number" class="form-control " required>
+                                                                            <div class="input-group-append"> <span class="input-group-text text-muted"> <i class="fab fa-cc-visa mx-1"></i> <i class="fab fa-cc-mastercard mx-1"></i> <i class="fab fa-cc-amex mx-1"></i> </span> </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="row">
+                                                                        <div class="col-sm-8">
+                                                                            <div class="form-group"> <label><span class="hidden-xs">
+                                                                                        <h6>Expiration Date</h6>
+                                                                                    </span></label>
+                                                                                <div class="input-group"> <input type="number" placeholder="MM" name="" class="form-control" required> <input type="number" placeholder="YY" name="" class="form-control" required> </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-sm-4">
+                                                                            <div class="form-group mb-4"> <label data-toggle="tooltip" title="Three digit CV code on the back of your card">
+                                                                                    <h6>CVV <i class="fa fa-question-circle d-inline"></i></h6>
+                                                                                </label> <input type="text" required class="form-control"> </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="card-footer"> <button type="button" class="subscribe btn btn-primary btn-block shadow-sm"> Confirm Payment </button>
+                                                               
+                                                            </div>
+                                                        </div> <!-- End -->
+                                                        <!-- Paypal info -->
+                                                        <div id="paypal" class="tab-pane fade pt-3">
+                                                            <p> <button type="button" class="btn btn-primary "><i class="fab fa-paypal mr-2"></i> Log into my Paypal</button> </p>
+                                                            <p class="text-muted"> Note: After clicking on the button, you will be directed to a secure gateway for payment. After completing the payment process, you will be redirected back to the website to view details of your order. </p>
+                                                        </div> <!-- End -->
+                                                        <!-- End -->
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                            </div>
+                            <div class="mb-5 mt-4 d-flex justify-content-between flex-column flex-lg-row">
+                                <a href="/checkout/addresses" class="btn btn-link text-muted">
+                                    <i class="fa fa-angle-left mr-2"></i>Back </a>
+                                <input type="submit" class="btn btn-dark" value="Place Order">
+                            </div>       
+                            </form>
+                        </div>
+                    </div>
+            </div>
+            <div class="col-xl-4 col-lg-4 mb-5 mt-5">
+                <div class="customer-sidebar card border-0">
+                    <div class="order-summary text-uppercase text-center">Order Summary</div>
+                    <nav class="list-group customer-nav">
+                        <div class="list-group-item bg-light">
+                            <div class="float-left mr-3"> <img class=" img-fluid" src="https://i.imgur.com/6oHix28.jpg" width="100" height="80"></div>
+                            <p class="mt-2 mb-0"><b>Kenzo</b></p>
+                            <small class="text-muted">Quantity: 2</small><br>
+                            <small class="text-muted">Price: 45.33</small>
+                        </div>
+                        <div class="list-group-item bg-light">
+                            <div class="float-left">Order Subtotal</div>
+                            <div class="float-right">$4.99</div>
+                        </div>
+                        <div class="list-group-item bg-light">
+                            <div class="float-left">Shipping Fee</div>
+                            <div class="float-right">$15.99</div>
+                        </div>
+                        <div class="list-group-item bg-light">
+                            <div class="float-left">GST/HST</div>
+                            <div class="float-right">$55.44</div>
+                        </div>
+                        <div class="list-group-item bg-light">
+                            <div class="float-left">Total</div>
+                            <div class="float-right font-weight-bold">$100.99</div>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<%- include('../footer'); -%>
