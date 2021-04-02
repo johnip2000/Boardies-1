@@ -104,6 +104,7 @@ class UserController {
     async Logout(req, res) {
         req.session.loggedin = false;
         delete req.session.username;
+        delete req.session.Voucher;
             return res.redirect('/');
     }
 }

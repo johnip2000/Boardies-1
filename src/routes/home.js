@@ -13,6 +13,7 @@ router
     .get('/shipping-info', homeController.ShippingInfo)
     .get('/cart', homeController.Cart)
     .post('/cart', homeController.AddtoCart)
+    .post('/promotions', homeController.Promotions)
     .get('/remove', homeController.Remove)
     .get('/minusitem',homeController.Minusitem)
     .get('/additem',homeController.Additem)
