@@ -308,7 +308,43 @@ class AdminController {
     }
 
     async Orders(req, res) {
+        const isLogin = req.session.loggedin ? true : false;
+        var isAdmin = false;
+        if(req.session.username != "" && typeof(req.session.username) != 'undefined') {
+            runQuery('SELECT * FROM Users WHERE email = \'' + req.session.username + '\'', function(user) {
+                isAdmin = user.recordset[0].isAdmin;
+                if(isLogin && isAdmin) {
+                    const sqlQuery = 'SELECT userName From Users u \
+                                    JOIN Orders o ON u.userID = o.userID';
+                    runQuery('SELECT * FROM Orders', (orders) => {
+                        runQuery(sqlQuery, (users) => {
+                            return res.render('admin/orders', {orders: orders.recordset, users: users.recordset});
+                        })   
+                    })
+                }
+                else {
+                    return res.render('pages/errors');
+                }
+            }); 
+        }    
+    }
 
+    async OrderDetails(req, res) {
+        const isLogin = req.session.loggedin ? true : false;
+        var isAdmin = false;
+        if(req.session.username != "" && typeof(req.session.username) != 'undefined') {
+            runQuery('SELECT * FROM Users WHERE email = \'' + req.session.username + '\'', function(user) {
+                isAdmin = user.recordset[0].isAdmin;
+                if(isLogin && isAdmin) {
+                    runQuery('SELECT * FROM Orders WHERE orderID = \'' + req.query.orderID + '\'', (orders) => {
+                        res.render('admin/orderDetail', {orders: orders.recordset[0]})
+                    })   
+                }
+                else {           
+                    return res.render('pages/errors');
+                }
+            }); 
+        }
     }
 }
 
