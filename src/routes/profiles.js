@@ -6,6 +6,7 @@ const profileController = new ProfileController();
 
 router
     .get('/profile', profileController.getProfile)
+    .get('/orders', profileController.getOrder)
     .get('/address', profileController.getAddress)
     .get('/address/add', profileController.getAddressForm)
     .get('/changepassword', profileController.GetChangePassword)
