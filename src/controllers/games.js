@@ -103,8 +103,8 @@ class GamesController {
             });
         }
         var productid = req.query.productID;
-        runQuery("SELECT * FROM Products WHERE productID =" + productid, function(result) {
-            return res.render('games/gameDetails', {listGame: result.recordset, isLogin, isAdmin});
+        runQuery("SELECT * FROM Products p JOIN Categories c ON p.categoryID = c.categoryID WHERE productID =" + productid, function(result) {
+            return res.render('games/gameDetails', {product: result.recordset[0], isLogin, isAdmin});
         });
     }
 }
