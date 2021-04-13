@@ -9,7 +9,23 @@ class AdminController {
             runQuery('SELECT * FROM Users WHERE email = \'' + req.session.username + '\'', function(user) {
                 isAdmin = user.recordset[0].isAdmin;
                 if(isLogin && isAdmin) {
-                    return res.render('admin/index', {isLogin, isAdmin});
+                    runQuery('SELECT COUNT(*) AS totalUser FROM Users', (users) => {
+                        runQuery('SELECT COUNT(*) AS totalOrder FROM Orders', (orders) => {
+                            runQuery('SELECT COUNT(*) AS totalProduct FROM Products', (products) => {
+                                runQuery('SELECT SUM(total) AS totalEarn FROM Orders', (earns) => {
+                                    var contextDict = {
+                                        totalUser: users.recordset[0],
+                                        totalOrder: orders.recordset[0],
+                                        totalProduct: products.recordset[0],
+                                        earns: earns.recordset[0],
+                                        isAdmin: isAdmin,
+                                        isLogin: isLogin
+                                    }
+                                    return res.render('admin/index', contextDict);
+                                })        
+                            }) 
+                        })
+                    })        
                 }
                 else {
                     return res.render('pages/errors');
