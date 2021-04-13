@@ -278,6 +278,34 @@ class ProfileController {
         }
     }
 
+    async OrderDetail(req, res) {
+        const isLogin = req.session.loggedin ? true : false;
+        var isAdmin = false;
+        if(isLogin == false) {
+            return res.redirect('/errors');
+        }
+        else {
+            if(req.session.username != "" && typeof(req.session.username) != 'undefined') {
+                runQuery('SELECT * FROM Users WHERE email = \'' + req.session.username + '\'', function(user) {
+                    isAdmin = user.recordset[0].isAdmin;
+                    var userID = user.recordset[0].userID;
+                    const sqlOrder = 'SELECT * FROM Orders o \
+                                    JOIN Order_Details od ON od.orderID = o.orderID \
+                                    JOIN Products p ON p.productID = od.productID \
+                                    WHERE o.orderID = \'' + req.query.orderID + '\'';
+                    const sqlAddress = 'SELECT * FROM Addresses a \
+                                        JOIN Orders o ON a.addressID = o.addressID \
+                                        WHERE o.orderID = \'' + req.query.orderID + '\'';                   
+                    runQuery(sqlOrder, (orders) => {
+                        runQuery(sqlAddress, (order) => {
+                            return res.render('profiles/orderDetail', {isLogin, isAdmin, userInfo: user.recordset[0], order: order.recordset[0], orders: orders.recordset});       
+                        })  
+                    })
+                }); 
+            }
+        }
+    }
+
     async GetChangePassword(req, res) {
         const isLogin = req.session.loggedin ? true : false;
         var isAdmin = false;
