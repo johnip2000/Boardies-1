@@ -352,9 +352,39 @@ class AdminController {
             runQuery('SELECT * FROM Users WHERE email = \'' + req.session.username + '\'', function(user) {
                 isAdmin = user.recordset[0].isAdmin;
                 if(isLogin && isAdmin) {
-                    runQuery('SELECT * FROM Orders WHERE orderID = \'' + req.query.orderID + '\'', (orders) => {
-                        res.render('admin/orderDetail', {orders: orders.recordset[0]})
-                    })   
+                    const sqlOrder = 'SELECT * FROM Orders o \
+                                    JOIN Order_Details od ON od.orderID = o.orderID \
+                                    JOIN Products p ON p.productID = od.productID \
+                                    WHERE o.orderID = \'' + req.query.orderID + '\'';
+                    const sqlAddress = 'SELECT * FROM Addresses a \
+                                        JOIN Orders o ON a.addressID = o.addressID \
+                                        WHERE o.orderID = \'' + req.query.orderID + '\'';
+                                         
+                    runQuery(sqlOrder, (orders) => {
+                        runQuery(sqlAddress, (order) => {
+                            res.render('admin/orderDetail', {order: order.recordset[0], orders: orders.recordset})        
+                        })  
+                    })
+                }
+                else {           
+                    return res.render('pages/errors');
+                }
+            }); 
+        }
+    }
+
+    async CancelOrder(req, res) {
+        const isLogin = req.session.loggedin ? true : false;
+        var isAdmin = false;
+        if(req.session.username != "" && typeof(req.session.username) != 'undefined') {
+            runQuery('SELECT * FROM Users WHERE email = \'' + req.session.username + '\'', function(user) {
+                isAdmin = user.recordset[0].isAdmin;
+                if(isLogin && isAdmin) {
+                    const status = 'cancelled';
+                    const sqlUpdate = 'UPDATE Orders SET status = \'' + status + '\' WHERE orderID = \'' + req.body.orderID + '\'';
+                    runQuery(sqlUpdate, (results) => {
+                        res.redirect('/admin/orders');
+                    })
                 }
                 else {           
                     return res.render('pages/errors');
