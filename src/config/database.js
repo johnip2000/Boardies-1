@@ -1,13 +1,15 @@
-const sql = require('mssql/msnodesqlv8')
+const sql = require('mssql')
 
 const config = {
+    user: 'boardies',
+    password: 'Cc123456',
+    server: 'boardies.database.windows.net', 
+    port : 1433,
     database: 'Boardies',
-    server: 'localhost',
-    driver: 'msnodesqlv8',
     options: {
-        trustedConnection: true
+        encrypt: true
     }
-};
+}
 
 function runQuery(sqlQuery, callback) {
     sql.connect(config, function (err) {
