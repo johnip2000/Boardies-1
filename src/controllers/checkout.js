@@ -34,6 +34,22 @@ class CheckoutController {
         } 
     }
 
+    async Review(req, res) {
+        const isLogin = req.session.loggedin ? true : false;
+        var isAdmin = false;
+        if(req.session.username != "" && typeof(req.session.username) != 'undefined') {
+            runQuery('SELECT * FROM Users WHERE email = \'' + req.session.username + '\'', function(user) {
+                isAdmin = user.recordset[0].isAdmin;
+                if(isLogin) {
+                    return res.render('checkout/review', {isLogin, isAdmin});
+                }
+                else {
+                    return res.render('pages/errors');
+                }
+            }); 
+        } 
+    }
+
     async PlaceOrder(req, res) {
         const isLogin = req.session.loggedin ? true : false;
         var isAdmin = false;
