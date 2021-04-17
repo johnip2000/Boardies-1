@@ -45,37 +45,7 @@ passport.serializeUser(function(user, cb) {
 passport.deserializeUser(function(obj, cb) {
   cb(null, obj);
 });
-const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
-const Mail = require('nodemailer/lib/mailer');
-const GOOGLE_CLIENT_ID = '901612188519-lk6kqv8leo89uiqg3rd91rn88afdej8n.apps.googleusercontent.com';
-const GOOGLE_CLIENT_SECRET = 'V2PTwCZwVTU8GH9g7C4-FnwN';
-passport.use(new GoogleStrategy({
-    clientID: GOOGLE_CLIENT_ID,
-    clientSecret: GOOGLE_CLIENT_SECRET,
-    callbackURL: "http://localhost:7000/auth/google/callback"
-  },
-  function(accessToken, refreshToken, profile, done) {
-      userProfile=profile;
-      return done(null, userProfile);
-  }
-));
 
-app.get('/auth/google', 
-  passport.authenticate('google', { scope : ['profile', 'email'] }));
- 
-app.get('/auth/google/callback', 
-  passport.authenticate('google', { failureRedirect: '/error' }),
-  function(req, res) {
-    // Successful authentication, redirect success.
-    console.log(userProfile)
-    console.log(`name = ${userProfile.displayName}`)
-    console.log(`emails = ${userProfile.emails[0].value}`)
-    //you will get this
-    res.redirect('/success');
-   // console.log(pool)
-   
-  });
-//********//
 app.use(express.static(path.resolve() + '/src/public'));
 
 app.use('/', HomeRouter);
