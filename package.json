@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "test": "mocha",
-    "start": "nodemon --experimental-modules --es-module-specifier-resolution=node server.js"
+    "start": "node server.js"
   },
   "dependencies": {
     "assert": "^2.0.0",
