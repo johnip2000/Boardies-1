@@ -293,8 +293,9 @@ class ProfileController {
                                     JOIN Order_Details od ON od.orderID = o.orderID \
                                     JOIN Products p ON p.productID = od.productID \
                                     WHERE o.orderID = \'' + req.query.orderID + '\'';
-                    const sqlAddress = 'SELECT * FROM Orders  \
-                                        WHERE orderID = \'' + req.query.orderID + '\'';
+                    const sqlAddress = 'SELECT * FROM Orders o  \
+                                        JOIN Addresses a ON a.addressID = o.addressID \
+                                        WHERE o.orderID = \'' + req.query.orderID + '\'';
                     runQuery(sqlOrder, (orders) => {
                         runQuery(sqlAddress, (order) => {
                             return res.render('profiles/orderDetail', {isLogin, isAdmin, userInfo: user.recordset[0], order: order.recordset[0], orders: orders.recordset});

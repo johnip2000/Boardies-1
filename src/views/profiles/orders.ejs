@@ -23,7 +23,7 @@
                                                 <%orders.forEach(function(item){%>
                                                     <tr>
                                                         <td><%=item.orderID%></td>
-                                                        <td><%=item.orderDate.toLocaleDateString()%></td>
+                                                        <td><%=item.orderDate%></td>
                                                         <% if(item.status == "cancelled") { %> 
                                                             <td class="text-danger font-weight-bold"><%=item.status.toUpperCase()%></td>
                                                         <%} else {%>

@@ -500,7 +500,7 @@ class CheckoutController {
                                 presult.recordset[0].DeliveryPostalCode + ", " +
                                 presult.recordset[0].DeliveryCountry;
 
-                            runQuery('INSERT INTO Orders(userID, useraddress, subTotal, discount, shippingFee, tax, total, payment, orderDate, status)\
+                            runQuery('INSERT INTO Orders(userID, addressID, subTotal, discount, shippingFee, tax, total, payment, orderDate, status)\
                                           VALUES (\'' + user.recordset[0].userID + '\', \
                                                     \'' + WholeAddress + '\', \
                                                     \'' + OriginalFee + '\', \
