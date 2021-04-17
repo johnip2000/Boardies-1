@@ -1,158 +1,242 @@
 <%- include('../header'); -%>
-
 <div class="mb-auto">
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-lg-8 col-xl-8">
                 <div class="block mb-5 mt-5">
                     <div class="col-12 bg-light">
-                        <ul class="nav nav-pills mb-4 nav-fill bg-light">                              
+                        <ul class="nav nav-pills mb-4 nav-fill bg-light">
                             <li class="nav-item"><a href="/checkout/addresses" class="nav-link text-sm bg-secondary text-white">ADDRESSES</a></li>
-                            <li class="nav-item"><a href="/checkout/shipping" class="nav-link text-sm ">SHIPPING & PAYMENT</a></li>
+                            <li class="nav-item"><a href="/checkout/shipping" class="nav-link text-sm ">SHIPPING</a></li>
                             <li class="nav-item"><a href="/checkout/review" class="nav-link text-sm ">REVIEW</a></li>
                         </ul>
                     </div>
                     <div class="block-header"><strong class="text-uppercase">Shipping Address</strong></div>
-                        <div class="block-body mt-4">
-                            <form method="post">
-                                <div class="block">
-                                    <div class="address-fieldset ShippingAddress">
+                    <div class="block-body mt-4">
+                        <form method="post">
+                            <div class="block">
+                                <div class="address-fieldset ShippingAddress">
                                     <div class="block-body">
                                         <div class="row">
                                             <div id="shippingAddressGroup" class="col-12">
                                                 <div class="card border-light">
+                                                    <%if (HavAddr == true) {%>
                                                     <div class="card-header">
                                                         <div class="custom-control custom-radio d-inline">
                                                             <input type="radio" id="shippingAddress" name="shippingAddressId" data-toggle="collapse" data-target="#collapseshippingAddress" aria-expanded="true" aria-controls="collapseshippingAddress"
-                                                                checked="checked" value="31377" class="custom-control-input"/>
-                                                            <label class="flex-grow-1 custom-control-label align-middle" for="shippingAddress">30 Imperial Rd</label>
-                                                            
+                                                                   checked="checked" value="savedaddress" class="custom-control-input"/>
+                                                            <label class="flex-grow-1 custom-control-label align-middle" for="shippingAddress"><%=Daddr1%> <%=Daddr2%>  <%=Dcity%> <%=Dprovince%> <%=DpostalCode%> <%=Dcountry%></label>
                                                         </div>
                                                         <a class="btn btn-sm btn-dark d-inline float-right" href="">Edit</a>
                                                     </div>
+                                                    <%}%>
                                                     <div id="collapseshippingAddress" class="collapse show" data-parent="#shippingAddressGroup"></div>
                                                 </div>
                                                 <div class="card border-light">
                                                     <div class="card-header">
                                                         <div class="custom-control custom-radio">
                                                             <input type="radio" id="shippingAddressNew"  name="shippingAddressId" data-toggle="collapse" data-target="#NewshippingAddress" aria-controls="NewshippingAddress"
-                                                                aria-expanded="false" value="" class="custom-control-input addressToggle"/>
+                                                            <%if(HavAddr == false) { %> checked="checked" aria-expanded="true" <%}else{%> aria-expanded="false" <%}%>value="manualaddress" class="custom-control-input addressToggle"/>
                                                             <label for="shippingAddressNew" class="custom-control-label align-middle">New Shipping Address</label>
                                                         </div>
                                                     </div>
-                                                    <div id="NewshippingAddress" class="collapse" data-parent="#shippingAddressGroup">
-                                                    <div class="card-body">
-                                                        <div class="addressBox shippingAddress">
-                                                            <div class="block-body">
-                                                                <div class="row">
-                                                                    <div class="form-group col-md-6">
-                                                                        <label for="address-fullName">Full Name *</label>
-                                                                        <input type="text" id="address-fullName" class="u-full-width form-control" name="fullName" value="">
-                                                                        <% if(typeof errorFullName !== 'undefined' && errorFullName) { %>
+                                                    <%if(HavAddr == false) { %>
+                                                    <div id="NewshippingAddress" class="collapse show" data-parent="#shippingAddressGroup">
+                                                        <h4 class="form-text text-danger font-weight-bold text-left mt-2"><%=Missinfo%></h4>
+                                                        <div class="card-body">
+                                                            <div class="addressBox shippingAddress">
+                                                                <div class="block-body">
+                                                                    <div class="row">
+                                                                        <div class="form-group col-md-6">
+                                                                            <label for="address-fullName">Full Name *</label>
+                                                                            <input type="text" id="address-fullName" class="u-full-width form-control" name="fullName" value="" required minlength="5" maxlength="50">
+                                                                            <% if(typeof errorFullName !== 'undefined' && errorFullName) { %>
                                                                             <small id="errorFullname" class="form-text text-danger font-weight-bold"><%=errorFullName%></small>
-                                                                        <% } %>   
-                                                                    </div>
-                                                                    <div class="form-group col-md-6">
-                                                                        <label for="address-address1">Address 1 *</label>
-                                                                        <input type="text" id="address-address1" class="u-full-width form-control" name="address1" value="">
-                                                                        <% if(typeof errorAddress !== 'undefined' && errorAddress) { %>
+                                                                            <% } %>
+                                                                        </div>
+                                                                        <div class="form-group col-md-6">
+                                                                            <label for="address-address1">Address 1 *</label>
+                                                                            <input type="text" id="address-address1" class="u-full-width form-control" name="address1" value="" required minlength="5" maxlength="50">
+                                                                            <% if(typeof errorAddress !== 'undefined' && errorAddress) { %>
                                                                             <small id="errorAddress" class="form-text text-danger font-weight-bold"><%=errorAddress%></small>
-                                                                        <% } %>   
-                                                                    </div>
-                                                                    <div class="form-group col-md-6">
-                                                                        <label for="address-address2">Address 2</label>
-                                                                        <input type="text" id="address-address2" class="u-full-width form-control" name="address2" value="">
-                                                                    </div>
-                                                                    <div class="form-group col-md-6">
-                                                                        <label for="address-city">City *</label>
-                                                                        <input type="text" id="address-city" class="u-full-width form-control" name="city" value="">
-                                                                        <% if(typeof errorCity !== 'undefined' && errorCity) { %>
+                                                                            <% } %>
+                                                                        </div>
+                                                                        <div class="form-group col-md-6">
+                                                                            <label for="address-address2">Address 2</label>
+                                                                            <input type="text" id="address-address2" class="u-full-width form-control" name="address2" value="" minlength="5" maxlength="50">
+                                                                        </div>
+                                                                        <div class="form-group col-md-6">
+                                                                            <label for="address-city">City *</label>
+                                                                            <input type="text" id="address-city" class="u-full-width form-control" name="city" value="" required minlength="3" maxlength="28">
+                                                                            <% if(typeof errorCity !== 'undefined' && errorCity) { %>
                                                                             <small id="errorCity" class="form-text text-danger font-weight-bold"><%=errorCity%></small>
-                                                                        <% } %>   
-                                                                    </div>
-                                                                    <div class="form-group col-md-6">
-                                                                        <label for="address-zipCode">Postal Code *</label>
-                                                                        <input type="text" id="address-zipCode" class=" form-control" name="postalCode" value="">
-                                                                        <% if(typeof errorPostalCode !== 'undefined' && errorPostalCode) { %>
+                                                                            <% } %>
+                                                                        </div>
+                                                                        <div class="form-group col-md-6">
+                                                                            <label for="address-zipCode">Postal Code *</label>
+                                                                            <input type="text"  id="address-zipCode" class=" form-control" name="postalCode" value="" required pattern="[A-Za-z][0-9][A-Za-z] [0-9][A-Za-z][0-9]" oninvalid="this.setCustomValidity('Please enter your postal code in this format: A9A A9A.')" onchange="this.setCustomValidity('')">
+                                                                            <% if(typeof errorPostalCode !== 'undefined' && errorPostalCode) { %>
                                                                             <small id="errorPostalCode" class="form-text text-danger font-weight-bold"><%=errorPostalCode%></small>
-                                                                        <% } %>   
-                                                                    </div>
-                                                                    <div class="form-group col-md-6">
-                                                                        <label for="address-state">Province *</label>
-                                                                        <select id="address-state"class="form-control" name="province">
-                                                                            <option value="Alberta">Alberta</option>
-                                                                            <option value="British Columbia">British Columbia</option>          
-                                                                            <option value="Manitoba">Manitoba</option>
-                                                                            <option value="NewBrunswick">New Brunswick</option>
-                                                                            <option value="Newfoundland and Labrador">Newfoundland and Labrador</option>
-                                                                            <option value="Northwest Territories">Northwest Territories</option>
-                                                                            <option value="Nova Scotia">Nova Scotia</option>
-                                                                            <option value="Nunavut">Nunavut</option>
-                                                                            <option value="Ontario">Ontario</option>
-                                                                            <option value="Prince Edward Island">Prince Edward Island</option>
-                                                                            <option value="Quebec">Quebec</option>
-                                                                            <option value="Saskatchewan">Saskatchewan</option>     
-                                                                            <option value="Yukon">Yukon</option>                         
-                                                                        </select>  
-                                                                    </div>
-                                                                    <div class="form-group col-md-6">
-                                                                        <label for="address-countryId">Country *</label>
-                                                                        <select class="form-control" name="country">
-                                                                            <option value="Canada" selected>Canada</option>
-                                                                        </select>
-                                                                    </div>
-                                                                    <div class="form-group col-md-6">
-                                                                        <label for="address-phone">Phone</label>
-                                                                        <input type="text" id="address-phone" class="u-full-width form-control" name="phone" value="">
-                                                                        <% if(typeof errorPhone !== 'undefined' && errorPhone) { %>
+                                                                            <% } %>
+                                                                        </div>
+                                                                        <div class="form-group col-md-6">
+                                                                            <label for="address-state">Province *</label>
+                                                                            <select id="address-state"class="form-control" name="province">
+                                                                                <option value="Alberta">Alberta</option>
+                                                                                <option value="British Columbia">British Columbia</option>
+                                                                                <option value="Manitoba">Manitoba</option>
+                                                                                <option value="NewBrunswick">New Brunswick</option>
+                                                                                <option value="Newfoundland and Labrador">Newfoundland and Labrador</option>
+                                                                                <option value="Northwest Territories">Northwest Territories</option>
+                                                                                <option value="Nova Scotia">Nova Scotia</option>
+                                                                                <option value="Nunavut">Nunavut</option>
+                                                                                <option value="Ontario">Ontario</option>
+                                                                                <option value="Prince Edward Island">Prince Edward Island</option>
+                                                                                <option value="Quebec">Quebec</option>
+                                                                                <option value="Saskatchewan">Saskatchewan</option>
+                                                                                <option value="Yukon">Yukon</option>
+                                                                            </select>
+                                                                        </div>
+                                                                        <div class="form-group col-md-6">
+                                                                            <label for="address-countryId">Country *</label>
+                                                                            <select class="form-control" name="country">
+                                                                                <option value="Canada" selected>Canada</option>
+                                                                            </select>
+                                                                        </div>
+                                                                        <div class="form-group col-md-6">
+                                                                            <label for="address-phone">Phone</label>
+                                                                            <input type="text" id="address-phone" class="u-full-width form-control" name="phone" value="">
+                                                                            <% if(typeof errorPhone !== 'undefined' && errorPhone) { %>
                                                                             <small id="errorPhone" class="form-text text-danger font-weight-bold"><%=errorPhone%></small>
-                                                                        <% } %>   
+                                                                            <% } %>
+                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    </div>
+                                                    <%}else{%>
+                                                        <div id="NewshippingAddress" class="collapse" data-parent="#shippingAddressGroup">
+                                                            <div class="card-body">
+                                                                <div class="addressBox shippingAddress">
+                                                                    <div class="block-body">
+                                                                        <div class="row">
+                                                                            <div class="form-group col-md-6">
+                                                                                <label for="address-fullName">Full Name *</label>
+                                                                                <input type="text" id="address-fullName" class="u-full-width form-control" name="fullName" value="">
+                                                                                <% if(typeof errorFullName !== 'undefined' && errorFullName) { %>
+                                                                                <small id="errorFullname" class="form-text text-danger font-weight-bold"><%=errorFullName%></small>
+                                                                                <% } %>
+                                                                            </div>
+                                                                            <div class="form-group col-md-6">
+                                                                                <label for="address-address1">Address 1 *</label>
+                                                                                <input type="text" id="address-address1" class="u-full-width form-control" name="address1" value="">
+                                                                                <% if(typeof errorAddress !== 'undefined' && errorAddress) { %>
+                                                                                <small id="errorAddress" class="form-text text-danger font-weight-bold"><%=errorAddress%></small>
+                                                                                <% } %>
+                                                                            </div>
+                                                                            <div class="form-group col-md-6">
+                                                                                <label for="address-address2">Address 2</label>
+                                                                                <input type="text" id="address-address2" class="u-full-width form-control" name="address2" value="">
+                                                                            </div>
+                                                                            <div class="form-group col-md-6">
+                                                                                <label for="address-city">City *</label>
+                                                                                <input type="text" id="address-city" class="u-full-width form-control" name="city" value="">
+                                                                                <% if(typeof errorCity !== 'undefined' && errorCity) { %>
+                                                                                <small id="errorCity" class="form-text text-danger font-weight-bold"><%=errorCity%></small>
+                                                                                <% } %>
+                                                                            </div>
+                                                                            <div class="form-group col-md-6">
+                                                                                <label for="address-zipCode">Postal Code *</label>
+                                                                                <input type="text" id="address-zipCode" class=" form-control" name="postalCode" value="">
+                                                                                <% if(typeof errorPostalCode !== 'undefined' && errorPostalCode) { %>
+                                                                                <small id="errorPostalCode" class="form-text text-danger font-weight-bold"><%=errorPostalCode%></small>
+                                                                                <% } %>
+                                                                            </div>
+                                                                            <div class="form-group col-md-6">
+                                                                                <label for="address-state">Province *</label>
+                                                                                <select id="address-state"class="form-control" name="province">
+                                                                                    <option value="Alberta">Alberta</option>
+                                                                                    <option value="British Columbia">British Columbia</option>
+                                                                                    <option value="Manitoba">Manitoba</option>
+                                                                                    <option value="NewBrunswick">New Brunswick</option>
+                                                                                    <option value="Newfoundland and Labrador">Newfoundland and Labrador</option>
+                                                                                    <option value="Northwest Territories">Northwest Territories</option>
+                                                                                    <option value="Nova Scotia">Nova Scotia</option>
+                                                                                    <option value="Nunavut">Nunavut</option>
+                                                                                    <option value="Ontario">Ontario</option>
+                                                                                    <option value="Prince Edward Island">Prince Edward Island</option>
+                                                                                    <option value="Quebec">Quebec</option>
+                                                                                    <option value="Saskatchewan">Saskatchewan</option>
+                                                                                    <option value="Yukon">Yukon</option>
+                                                                                </select>
+                                                                            </div>
+                                                                            <div class="form-group col-md-6">
+                                                                                <label for="address-countryId">Country *</label>
+                                                                                <select class="form-control" name="country">
+                                                                                    <option value="Canada" selected>Canada</option>
+                                                                                </select>
+                                                                            </div>
+                                                                            <div class="form-group col-md-6">
+                                                                                <label for="address-phone">Phone</label>
+                                                                                <input type="text" id="address-phone" class="u-full-width form-control" name="phone" value="">
+                                                                                <% if(typeof errorPhone !== 'undefined' && errorPhone) { %>
+                                                                                <small id="errorPhone" class="form-text text-danger font-weight-bold"><%=errorPhone%></small>
+                                                                                <% } %>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    <%}%>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                    </div>
                                 </div>
-                                <div class="mb-5 mt-4 d-flex justify-content-between flex-column flex-lg-row">
-                                    <a href="/cart" class="btn btn-link text-muted">
-                                        <i class="fa fa-angle-left mr-2"></i>Back </a>
-                                    <input type="submit" class="btn btn-dark" value="Confirm addresses">
-                                </div>
-                            </form>
-                        </div>
+                            </div>
+                            <div class="mb-5 mt-4 d-flex justify-content-between flex-column flex-lg-row">
+                                <a href="/cart" class="btn btn-link text-muted">
+                                    <i class="fa fa-angle-left mr-2"></i>Back </a>
+                                <input type="submit" class="btn btn-dark" value="Confirm addresses">
+                                <class="btn btn-dark"></class>
+                            </div>
+                        </form>
                     </div>
+                </div>
             </div>
             <div class="col-xl-4 col-lg-4 mb-5 mt-5">
                 <div class="customer-sidebar card border-0">
                     <div class="order-summary text-uppercase text-center">Order Summary</div>
                     <nav class="list-group customer-nav">
                         <div class="list-group-item bg-light">
-                            <div class="float-left mr-3"> <img class=" img-fluid" src="https://i.imgur.com/6oHix28.jpg" width="100" height="80"></div>
-                            <p class="mt-2 mb-0"><b>Kenzo</b></p>
-                            <small class="text-muted">Quantity: 2</small><br>
-                            <small class="text-muted">Price: 45.33</small>
+                            <tbody>
+                            <tr>
+                                <%ItemsPurchase.forEach(function(item){%>
+                                <div class="float-left mr-3"> <img class=" img-fluid" src="<%=item.CartProductImage%>" width="100" height="80"></div>
+                                <p class="mt-2 mb-0"><b><%=item.ProductName%></b></p>
+                                <small class="text-muted">Quantity: <%=item.CartProductQuantity%></small><br>
+                                <small class="text-muted">Price: <%=item.Price%></small><br><br><br>
+                                <%})%>
+                            </tr>
+                            </tbody>
                         </div>
                         <div class="list-group-item bg-light">
                             <div class="float-left">Order Subtotal</div>
-                            <div class="float-right">$4.99</div>
+                            <div class="float-right">$<%=Subtotal%></div>
                         </div>
                         <div class="list-group-item bg-light">
                             <div class="float-left">Shipping Fee</div>
-                            <div class="float-right">$15.99</div>
+                            <div class="float-right">$<%=DShipping%></div>
                         </div>
                         <div class="list-group-item bg-light">
                             <div class="float-left">GST/HST</div>
-                            <div class="float-right">$55.44</div>
+                            <div class="float-right">$<%=DTax.toFixed(2)%></div>
                         </div>
                         <div class="list-group-item bg-light">
                             <div class="float-left">Total</div>
-                            <div class="float-right font-weight-bold">$100.99</div>
+                            <div class="float-right font-weight-bold">$<%=DTempTotal.toFixed(2)%></div>
                         </div>
                     </nav>
                 </div>

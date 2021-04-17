@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="icon" href="/docs/4.1/assets/img/favicons/favicon.ico">
@@ -12,125 +12,125 @@
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 
-  </head>
+</head>
 
-  <body>
-    <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
-        <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="/">Boardies</a>
-        <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
-        <ul class="navbar-nav px-3">
-          <li class="nav-item text-nowrap">
+<body>
+<nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
+    <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="/">Boardies</a>
+    <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
+    <ul class="navbar-nav px-3">
+        <li class="nav-item text-nowrap">
             <a class="nav-link" href="/logout">Sign out</a>
-          </li>
-        </ul>
-    </nav>
-    <div class="container-fluid">
-      <div class="row">
+        </li>
+    </ul>
+</nav>
+<div class="container-fluid">
+    <div class="row">
         <nav class="col-md-2 d-none d-md-block bg-light sidebar">
-          <div class="sidebar-sticky">
-            <ul class="nav flex-column">
-              <li class="nav-item">
-                <a class="nav-link active" href="/admin"><span data-feather="home"></span>Dashboard</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="/admin/orders"><span data-feather="file"></span>Orders</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="/admin/products"><span data-feather="shopping-cart"></span>Products<span class="sr-only">(current)</span></a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="/admin/customers"><span data-feather="users"></span>Customers</a>
-              </li>
-            </ul>
+            <div class="sidebar-sticky">
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/admin"><span data-feather="home"></span>Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/admin/orders"><span data-feather="file"></span>Orders</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/admin/products"><span data-feather="shopping-cart"></span>Products<span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/admin/customers"><span data-feather="users"></span>Customers</a>
+                    </li>
+                </ul>
         </nav>
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4 mt-5">
-          <div class="row">
-            <div class="col-xl-3 col-md-6 mb-4">
-                <div class="card border-left-primary shadow h-100 py-2">
-                    <div class="card-body">
-                        <div class="row no-gutters align-items-center">
-                            <div class="col mr-2">
-                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                    Total Users</div>
-                                <div class="h5 mb-0 font-weight-bold text-gray-800"><%=totalUser.totalUser%></div>
+            <div class="row">
+                <div class="col-xl-3 col-md-6 mb-4">
+                    <div class="card border-left-primary shadow h-100 py-2">
+                        <div class="card-body">
+                            <div class="row no-gutters align-items-center">
+                                <div class="col mr-2">
+                                    <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                        Total Users</div>
+                                    <div class="h5 mb-0 font-weight-bold text-gray-800"><%=totalUser.totalUser%></div>
+                                </div>
+                                <div class="col-auto">
+                                    <i class="fas fa-users fa-2x text-gray-300"></i>
+                                </div>
                             </div>
-                            <div class="col-auto">
-                                <i class="fas fa-users fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xl-3 col-md-6 mb-4">
+                    <div class="card border-left-success shadow h-100 py-2">
+                        <div class="card-body">
+                            <div class="row no-gutters align-items-center">
+                                <div class="col mr-2">
+                                    <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                        Earnings Total</div>
+                                    <div class="h5 mb-0 font-weight-bold text-gray-800"><%=earns.totalEarn.toFixed(2)%></div>
+                                </div>
+                                <div class="col-auto">
+                                    <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xl-3 col-md-6 mb-4">
+                    <div class="card border-left-success shadow h-100 py-2">
+                        <div class="card-body">
+                            <div class="row no-gutters align-items-center">
+                                <div class="col mr-2">
+                                    <div class="text-xs font-weight-bold text- text-uppercase mb-1">
+                                        Total Orders</div>
+                                    <div class="h5 mb-0 font-weight-bold text-gray-800"><%=totalOrder.totalOrder%></div>
+                                </div>
+                                <div class="col-auto">
+                                    <i class="fas fa-shopping-bag fa-2x text-gray-300"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pending Requests Card Example -->
+                <div class="col-xl-3 col-md-6 mb-4">
+                    <div class="card border-left-warning shadow h-100 py-2">
+                        <div class="card-body">
+                            <div class="row no-gutters align-items-center">
+                                <div class="col mr-2">
+                                    <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
+                                        Total Products Available</div>
+                                    <div class="h5 mb-0 font-weight-bold text-gray-800"><%=totalProduct.totalProduct%></div>
+                                </div>
+                                <div class="col-auto">
+                                    <i class="fas fa-dice fa-2x text-gray-300"></i>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-
-            <div class="col-xl-3 col-md-6 mb-4">
-                <div class="card border-left-success shadow h-100 py-2">
-                    <div class="card-body">
-                        <div class="row no-gutters align-items-center">
-                            <div class="col mr-2">
-                                <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                                    Earnings Total</div>
-                                <div class="h5 mb-0 font-weight-bold text-gray-800"><%=earns.totalEarn.toFixed(2)%></div>
-                            </div>
-                            <div class="col-auto">
-                                <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-xl-3 col-md-6 mb-4">
-              <div class="card border-left-success shadow h-100 py-2">
-                  <div class="card-body">
-                      <div class="row no-gutters align-items-center">
-                          <div class="col mr-2">
-                              <div class="text-xs font-weight-bold text- text-uppercase mb-1">
-                                  Total Orders</div>
-                              <div class="h5 mb-0 font-weight-bold text-gray-800"><%=totalOrder.totalOrder%></div>
-                          </div>
-                          <div class="col-auto">
-                              <i class="fas fa-shopping-bag fa-2x text-gray-300"></i>
-                          </div>
-                      </div>
-                  </div>
-              </div>
-          </div>
-
-            <!-- Pending Requests Card Example -->
-            <div class="col-xl-3 col-md-6 mb-4">
-                <div class="card border-left-warning shadow h-100 py-2">
-                    <div class="card-body">
-                        <div class="row no-gutters align-items-center">
-                            <div class="col mr-2">
-                                <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
-                                    Total Products Available</div>
-                                <div class="h5 mb-0 font-weight-bold text-gray-800"><%=totalProduct.totalProduct%></div>
-                            </div>
-                            <div class="col-auto">
-                                <i class="fas fa-dice fa-2x text-gray-300"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
         </main>
-        </div>
-        </div>
-    
+    </div>
+</div>
 
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
-    <script src="../../assets/js/vendor/popper.min.js"></script>
-    <script src="../../dist/js/bootstrap.min.js"></script>
 
-    <!-- Icons -->
-    <script src="https://unpkg.com/feather-icons/dist/feather.min.js"></script>
-    <script>
-      feather.replace()
-    </script>
-  </body>
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
+<script src="../../assets/js/vendor/popper.min.js"></script>
+<script src="../../dist/js/bootstrap.min.js"></script>
+
+<!-- Icons -->
+<script src="https://unpkg.com/feather-icons/dist/feather.min.js"></script>
+<script>
+    feather.replace()
+</script>
+</body>
 </html>

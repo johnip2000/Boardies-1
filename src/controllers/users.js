@@ -22,7 +22,7 @@ class UserController {
                                 signInError: "Your account has been blocked, please contact customer service for further support.",
                                 isAdmin: false,
                                 isLogin: false
-                            });  
+                            });
                         }
                         else {
                             req.session.loggedin = true;
@@ -36,15 +36,15 @@ class UserController {
                                         return res.redirect('/');
                                     }
                                 });
-                            });        
-                        }       
+                            });
+                        }
                     }
                     else {
                         return res.render('pages/login', {
                             signInError: "Wrong username or password",
                             isAdmin: false,
                             isLogin: false
-                        });  
+                        });
                     }
                 }
                 else {
@@ -52,7 +52,7 @@ class UserController {
                         signInError: "Wrong username or password",
                         isAdmin: false,
                         isLogin: false
-                    });  
+                    });
                 }
             })
         }
@@ -69,43 +69,46 @@ class UserController {
         }
         else {
             runQuery('SELECT * FROM Users WHERE email = \'' + emailNew + '\'', function(user) {
-            if(user.recordset.length == 1) {
-                return res.render('pages/login', {
-                    signUpError: "This email has already used. Please try another email.",
-                    isAdmin: false,
-                    isLogin: false
-                });
-            }
-            else {
-                const userID = Math.random().toString(36).substr(2, 9);
-                var passwordHash = bcrypt.hashSync(passwordNew, 10);
-                var insertQuery = 'INSERT INTO Users(userID, fullName, email, userName, userPassword, isAdmin)\
+                if(user.recordset.length == 1) {
+                    return res.render('pages/login', {
+                        signUpError: "This email has already used. Please try another email.",
+                        isAdmin: false,
+                        isLogin: false
+                    });
+                }
+                else {
+                    const userID = Math.random().toString(36).substr(2, 9);
+                    var passwordHash = bcrypt.hashSync(passwordNew, 10);
+                    var insertQuery = 'INSERT INTO Users(userID, fullName, email, userName, userPassword, isAdmin)\
                                     VALUES(\'' + userID + '\', \
                                     \'' + fullName + '\', \
                                     \'' + emailNew + '\', \
                                     \'' + emailNew + '\', \
                                     \'' + passwordHash + '\', \
                                     \'' + false + '\')';
-                runQuery(insertQuery, (result) => {
-                    req.session.loggedin = true;
-                    req.session.username = emailNew;
-                    runQuery('SELECT TOP(10) * FROM Products', function(result) {
-                        runQuery('SELECT * FROM Categories', function(listCategories) {
-                            return res.redirect('/');
+                    runQuery(insertQuery, (result) => {
+                        req.session.loggedin = true;
+                        req.session.username = emailNew;
+                        runQuery('SELECT TOP(10) * FROM Products', function(result) {
+                            runQuery('SELECT * FROM Categories', function(listCategories) {
+                                return res.redirect('/');
+                            });
                         });
-                    });       
-                })
-            }
-            
+                    })
+                }
+
             });
         }
     }
 
     async Logout(req, res) {
-        req.session.loggedin = false;
-        delete req.session.username;
-        delete req.session.Voucher;
+        runQuery('UPDATE PreOrder SET UseCoupon = 0   WHERE  UserEmail = \'' + req.session.username + '\' ', function(updatecoupon){
+            req.session.loggedin = false;
+            delete req.session.username;
+            delete req.session.ConfirmAddr;
+            delete req.session.Voucher;
             return res.redirect('/');
+        })
     }
 }
 

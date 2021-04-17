@@ -23,7 +23,7 @@ class ProfileController {
                 runQuery('SELECT * FROM Users WHERE email = \'' + req.session.username + '\'', function(user) {
                     isAdmin = user.recordset[0].isAdmin;
                     res.render('profiles/index', {isLogin, isAdmin, userInfo: user.recordset[0]});
-                }); 
+                });
             }
         }
     }
@@ -49,17 +49,17 @@ class ProfileController {
                             userId = \'' + userID + '\' ';
                             runQuery(sqlUpdate, function(result) {
                                 var successUpdate = "New information successfully saved.";
-                                runQuery('SELECT * FROM Users WHERE email = \'' + req.session.username + '\'', function(user) { 
+                                runQuery('SELECT * FROM Users WHERE email = \'' + req.session.username + '\'', function(user) {
                                     return res.render('profiles/index', {isLogin, isAdmin, userInfo: user.recordset[0], successUpdate});
-                                })        
+                                })
                             })
                         }
                         else {
                             var passwordError = "Current password is not match, please try again.";
                             return res.render('profiles/index', {isLogin, isAdmin, userInfo: user.recordset[0], passwordError});
                         }
-                    }    
-                }); 
+                    }
+                });
             }
         }
     }
@@ -78,7 +78,7 @@ class ProfileController {
                     runQuery('SELECT * FROM Addresses WHERE userID = \'' + userID + '\'', (address) => {
                         return res.render('profiles/address', {isLogin, isAdmin, userInfo: user.recordset[0], address: address.recordset});
                     })
-                }); 
+                });
             }
         }
     }
@@ -94,8 +94,8 @@ class ProfileController {
                 runQuery('SELECT * FROM Users WHERE email = \'' + req.session.username + '\'', function(user) {
                     isAdmin = user.recordset[0].isAdmin;
                     res.render('profiles/addressForm', {isLogin, isAdmin, userInfo: user.recordset[0]});
-                }); 
-            }        
+                });
+            }
         }
     }
 
@@ -114,7 +114,7 @@ class ProfileController {
                     runQuery('SELECT * FROM Addresses WHERE userID = \'' + userID + '\' AND addressID = \'' + addressID + '\'', (address) => {
                         return res.render('profiles/editAddressForm', {isLogin, isAdmin, userInfo: user.recordset[0], address: address.recordset[0]});
                     })
-                }); 
+                });
             }
         }
     }
@@ -131,7 +131,7 @@ class ProfileController {
                     isAdmin = user.recordset[0].isAdmin;
                     let {userID, fullName, address1, address2, city, province, postalCode, country, phone} = req.body;
                     if(isEmpty(fullName) || isEmpty(address1) || isEmpty(city) || isEmpty(province) || isEmpty(postalCode)
-                         || isEmpty(country) || isEmpty(phone)) {
+                        || isEmpty(country) || isEmpty(phone)) {
                         if(isEmpty(fullName)) {
                             var errFullName = "Please enter valid name";
                         }
@@ -140,7 +140,7 @@ class ProfileController {
                         }
                         if(isEmpty(city)) {
                             var errCity = "Please enter your city";
-                            }
+                        }
                         if(isEmpty(postalCode)) {
                             var errPostalCode = "Please enter valid postal code";
                         }
@@ -156,7 +156,7 @@ class ProfileController {
                             errorCity: errCity,
                             errorPostalCode: errPostalCode,
                             errorPhone: errPhone
-                        };   
+                        };
                         res.render('profiles/addressForm', contextDict);
                     }
                     else {
@@ -173,8 +173,8 @@ class ProfileController {
                             return res.redirect('/customer/address');
                         })
                     }
-                }); 
-            }        
+                });
+            }
         }
     }
 
@@ -188,10 +188,10 @@ class ProfileController {
             if(req.session.username != "" && typeof(req.session.username) != 'undefined') {
                 runQuery('SELECT * FROM Users WHERE email = \'' + req.session.username + '\'', function(user) {
                     isAdmin = user.recordset[0].isAdmin;
-                    let {userID, addressID, fullName, address1, address2, city, province, postalCode, country, phone} = req.body;
-                    if(isEmpty(fullName) || isEmpty(address1) || isEmpty(city) || isEmpty(province) || isEmpty(postalCode)
-                         || isEmpty(country) || isEmpty(phone)) {
-                        if(isEmpty(fullName)) {
+                    let {userID, addressID, name, address1, address2, city, province, postalCode, country, phone} = req.body;
+                    if(isEmpty(name) || isEmpty(address1) || isEmpty(city) || isEmpty(province) || isEmpty(postalCode)
+                        || isEmpty(country) || isEmpty(phone)) {
+                        if(isEmpty(name)) {
                             var errFullName = "Please enter valid name";
                         }
                         if(isEmpty(address1)) {
@@ -199,7 +199,7 @@ class ProfileController {
                         }
                         if(isEmpty(city)) {
                             var errCity = "Please enter your city";
-                            }
+                        }
                         if(isEmpty(postalCode)) {
                             var errPostalCode = "Please enter valid postal code";
                         }
@@ -215,11 +215,11 @@ class ProfileController {
                             errorCity: errCity,
                             errorPostalCode: errPostalCode,
                             errorPhone: errPhone
-                        };   
+                        };
                         res.render('profiles/addressForm', contextDict);
                     }
                     else {
-                        const sqlUpdate = 'UPDATE Addresses SET fullname =  \'' + fullName + '\', \
+                        const sqlUpdate = 'UPDATE Addresses SET name =  \'' + name + '\', \
                                             address1 = \'' + address1 + '\', \
                                             address2 = \'' + address2 + '\', \
                                             city =  \'' + city + '\', \
@@ -233,8 +233,8 @@ class ProfileController {
                             return res.redirect('/customer/address');
                         })
                     }
-                }); 
-            }        
+                });
+            }
         }
     }
 
@@ -253,8 +253,8 @@ class ProfileController {
                     const sqlDelete = 'DELETE FROM Addresses WHERE addressID = \'' + addressID + '\' AND userID = \'' + userID + '\'';
                     runQuery(sqlDelete, (result) => {
                         return res.redirect('/customer/address');
-                    })     
-                }); 
+                    })
+                });
             }
         }
     }
@@ -273,7 +273,7 @@ class ProfileController {
                     runQuery('SELECT * FROM Orders WHERE userID = \'' + userID + '\'', (orders) => {
                         return res.render('profiles/orders', {isLogin, isAdmin, userInfo: user.recordset[0], orders: orders.recordset});
                     })
-                }); 
+                });
             }
         }
     }
@@ -293,15 +293,14 @@ class ProfileController {
                                     JOIN Order_Details od ON od.orderID = o.orderID \
                                     JOIN Products p ON p.productID = od.productID \
                                     WHERE o.orderID = \'' + req.query.orderID + '\'';
-                    const sqlAddress = 'SELECT * FROM Addresses a \
-                                        JOIN Orders o ON a.addressID = o.addressID \
-                                        WHERE o.orderID = \'' + req.query.orderID + '\'';                   
+                    const sqlAddress = 'SELECT * FROM Orders  \
+                                        WHERE orderID = \'' + req.query.orderID + '\'';
                     runQuery(sqlOrder, (orders) => {
                         runQuery(sqlAddress, (order) => {
-                            return res.render('profiles/orderDetail', {isLogin, isAdmin, userInfo: user.recordset[0], order: order.recordset[0], orders: orders.recordset});       
-                        })  
+                            return res.render('profiles/orderDetail', {isLogin, isAdmin, userInfo: user.recordset[0], order: order.recordset[0], orders: orders.recordset});
+                        })
                     })
-                }); 
+                });
             }
         }
     }
@@ -317,8 +316,8 @@ class ProfileController {
                 runQuery('SELECT * FROM Users WHERE email = \'' + req.session.username + '\'', function(user) {
                     isAdmin = user.recordset[0].isAdmin;
                     res.render('profiles/changepassword', {isLogin, isAdmin, userInfo: user.recordset[0]});
-                }); 
-            }        
+                });
+            }
         }
     }
 
@@ -339,7 +338,7 @@ class ProfileController {
                         }
                         if(newPassword == "") {
                             var newPasswordError = "Please enter your new password."
-                        }            
+                        }
                         return res.render('profiles/changepassword', {isLogin, isAdmin, userInfo: user.recordset[0], passwordError, newPasswordError});
                     }
                     else {
@@ -348,7 +347,7 @@ class ProfileController {
                             const sqlUpdate = 'UPDATE Users SET userPassword = \'' + passwordHash + '\' WHERE userId = \'' + userID + '\' ';
                             runQuery(sqlUpdate, (result) => {
                                 var updateMessage = "New password successfully saved.";
-                                runQuery('SELECT * FROM Users WHERE email = \'' + req.session.username + '\'', function(user) { 
+                                runQuery('SELECT * FROM Users WHERE email = \'' + req.session.username + '\'', function(user) {
                                     return res.render('profiles/changepassword', {isLogin, isAdmin, userInfo: user.recordset[0], updateMessage});
                                 })
                             })
@@ -356,10 +355,10 @@ class ProfileController {
                         else {
                             var updateError = "Current password is not match, please try again.";
                             return res.render('profiles/changepassword', {isLogin, isAdmin, userInfo: user.recordset[0], updateError});
-                        }       
+                        }
                     }
-                }); 
-            }  
+                });
+            }
         }
     }
 }

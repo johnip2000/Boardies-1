@@ -22,16 +22,16 @@ class AdminController {
                                         isLogin: isLogin
                                     }
                                     return res.render('admin/index', contextDict);
-                                })        
-                            }) 
+                                })
+                            })
                         })
-                    })        
+                    })
                 }
                 else {
                     return res.render('pages/errors');
                 }
-            }); 
-        } 
+            });
+        }
     }
 
     async Products(req, res) {
@@ -46,14 +46,14 @@ class AdminController {
                     runQuery('SELECT * FROM Products', (products) => {
                         runQuery(sqlQuery, (category) => {
                             return res.render('admin/products', {products: products.recordset, categories: category.recordset});
-                        })   
+                        })
                     })
                 }
                 else {
                     return res.render('pages/errors');
                 }
-            }); 
-        }    
+            });
+        }
     }
 
     async newProductForm(req, res) {
@@ -68,8 +68,8 @@ class AdminController {
                 else {
                     return res.render('pages/errors');
                 }
-            }); 
-        } 
+            });
+        }
     }
 
     async AddProduct(req, res) {
@@ -102,10 +102,10 @@ class AdminController {
                         var contextDict = {
                             isAdmin: isAdmin,
                             isLogin: isLogin,
-                            nameError: nameError, 
+                            nameError: nameError,
                             priceError: priceError,
-                            unitInStockError: unitInStockError, 
-                            descriptionError: descriptionError, 
+                            unitInStockError: unitInStockError,
+                            descriptionError: descriptionError,
                             yearError: yearError,
                             imageError: imageError
                         }
@@ -123,13 +123,13 @@ class AdminController {
                         runQuery(insertQuery, (result) => {
                             return res.redirect('/admin/products');
                         })
-                    }     
+                    }
                 }
                 else {
                     return res.render('pages/errors');
                 }
-            }); 
-        }    
+            });
+        }
     }
 
     async EditProductForm(req, res) {
@@ -141,12 +141,12 @@ class AdminController {
                 if(isLogin && isAdmin) {
                     runQuery('SELECT * FROM Products WHERE productID = \'' + req.query.productID + '\'', (products) => {
                         res.render('admin/editProduct', {product: products.recordset[0], productID: req.query.productID})
-                    })   
+                    })
                 }
-                else {           
+                else {
                     return res.render('pages/errors');
                 }
-            }); 
+            });
         }
     }
 
@@ -180,16 +180,16 @@ class AdminController {
                         var contextDict = {
                             isAdmin: isAdmin,
                             isLogin: isLogin,
-                            nameError: nameError, 
+                            nameError: nameError,
                             priceError: priceError,
-                            unitInStockError: unitInStockError, 
-                            descriptionError: descriptionError, 
+                            unitInStockError: unitInStockError,
+                            descriptionError: descriptionError,
                             yearError: yearError,
                             imageError: imageError
                         }
                         runQuery('SELECT * FROM Products WHERE productID = \'' + productID + '\'', (products) => {
                             res.render('admin/editProduct', {product: products.recordset[0], contextDict})
-                        })  
+                        })
                     }
                     else {
                         var updateQuery = 'UPDATE Products SET \
@@ -204,13 +204,13 @@ class AdminController {
                         runQuery(updateQuery, (result) => {
                             return res.redirect('/admin/products');
                         })
-                    }     
+                    }
                 }
                 else {
                     return res.render('pages/errors');
                 }
-            }); 
-        }  
+            });
+        }
     }
 
     async DeleteProduct(req, res) {
@@ -227,8 +227,8 @@ class AdminController {
                 else {
                     return res.render('pages/errors');
                 }
-            }); 
-        } 
+            });
+        }
     }
 
     async ProductDetail(req, res) {
@@ -240,14 +240,14 @@ class AdminController {
                 if(isLogin && isAdmin) {
                     runQuery('SELECT * FROM Products WHERE productID = \'' + req.query.productID + '\'', (products) => {
                         res.render('admin/productDetail', {product: products.recordset[0]})
-                    })   
+                    })
                 }
-                else {           
+                else {
                     return res.render('pages/errors');
                 }
-            }); 
+            });
         }
-    } 
+    }
 
     async Customers(req, res) {
         const isLogin = req.session.loggedin ? true : false;
@@ -263,8 +263,8 @@ class AdminController {
                 else {
                     return res.render('pages/errors');
                 }
-            }); 
-        }    
+            });
+        }
     }
 
     async CustomerDetail(req, res) {
@@ -276,12 +276,12 @@ class AdminController {
                 if(isLogin && isAdmin) {
                     runQuery('SELECT * FROM Users WHERE userID = \'' + req.query.customerID + '\'', (customers) => {
                         res.render('admin/customerDetail', {customer: customers.recordset[0]})
-                    })   
+                    })
                 }
-                else {           
+                else {
                     return res.render('pages/errors');
                 }
-            }); 
+            });
         }
     }
 
@@ -300,8 +300,8 @@ class AdminController {
                 else {
                     return res.render('pages/errors');
                 }
-            }); 
-        } 
+            });
+        }
     }
 
     async Unblocked(req, res) {
@@ -319,8 +319,8 @@ class AdminController {
                 else {
                     return res.render('pages/errors');
                 }
-            }); 
-        } 
+            });
+        }
     }
 
     async Orders(req, res) {
@@ -335,14 +335,14 @@ class AdminController {
                     runQuery('SELECT * FROM Orders', (orders) => {
                         runQuery(sqlQuery, (users) => {
                             return res.render('admin/orders', {orders: orders.recordset, users: users.recordset});
-                        })   
+                        })
                     })
                 }
                 else {
                     return res.render('pages/errors');
                 }
-            }); 
-        }    
+            });
+        }
     }
 
     async OrderDetails(req, res) {
@@ -356,20 +356,20 @@ class AdminController {
                                     JOIN Order_Details od ON od.orderID = o.orderID \
                                     JOIN Products p ON p.productID = od.productID \
                                     WHERE o.orderID = \'' + req.query.orderID + '\'';
-                    const sqlAddress = 'SELECT * FROM Addresses a \
-                                        JOIN Orders o ON a.addressID = o.addressID \
-                                        WHERE o.orderID = \'' + req.query.orderID + '\'';
-                                         
+                    const sqlAddress = 'SELECT * FROM Orders \
+                                        WHERE orderID = \'' + req.query.orderID + '\'';
+
                     runQuery(sqlOrder, (orders) => {
                         runQuery(sqlAddress, (order) => {
-                            res.render('admin/orderDetail', {order: order.recordset[0], orders: orders.recordset})        
-                        })  
+                            //console.log(order.recordset[0])
+                            res.render('admin/orderDetail', {order: order.recordset[0], orders: orders.recordset})
+                        })
                     })
                 }
-                else {           
+                else {
                     return res.render('pages/errors');
                 }
-            }); 
+            });
         }
     }
 
@@ -386,10 +386,10 @@ class AdminController {
                         res.redirect('/admin/orders');
                     })
                 }
-                else {           
+                else {
                     return res.render('pages/errors');
                 }
-            }); 
+            });
         }
     }
 }

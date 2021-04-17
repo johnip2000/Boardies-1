@@ -1,101 +1,101 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="icon" href="/docs/4.1/assets/img/favicons/favicon.ico">
-    <title>Product Inventory</title>
-    <!-- Bootstrap core CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-    <!-- Custom styles for this template -->
-    <link rel="stylesheet" href="/styles/dashboard.css">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="icon" href="/docs/4.1/assets/img/favicons/favicon.ico">
+  <title>Product Inventory</title>
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  <!-- Custom styles for this template -->
+  <link rel="stylesheet" href="/styles/dashboard.css">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 
-  </head>
+</head>
 
-  <body>
-    <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
-        <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="/">Boardies</a>
-        <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
-        <ul class="navbar-nav px-3">
-          <li class="nav-item text-nowrap">
-            <a class="nav-link" href="/logout">Sign out</a>
+<body>
+<nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
+  <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="/">Boardies</a>
+  <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
+  <ul class="navbar-nav px-3">
+    <li class="nav-item text-nowrap">
+      <a class="nav-link" href="/logout">Sign out</a>
+    </li>
+  </ul>
+</nav>
+
+<div class="container-fluid">
+  <div class="row">
+    <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+      <div class="sidebar-sticky">
+        <ul class="nav flex-column">
+          <li class="nav-item">
+            <a class="nav-link" href="/admin"><span data-feather="home"></span>Dashboard</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/admin/orders"><span data-feather="file"></span>Orders</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="/admin/products"><span data-feather="shopping-cart"></span>Products<span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/admin/customers"><span data-feather="users"></span>Customers</a>
           </li>
         </ul>
     </nav>
 
-    <div class="container-fluid">
-      <div class="row">
-        <nav class="col-md-2 d-none d-md-block bg-light sidebar">
-          <div class="sidebar-sticky">
-            <ul class="nav flex-column">
-              <li class="nav-item">
-                <a class="nav-link" href="/admin"><span data-feather="home"></span>Dashboard</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="/admin/orders"><span data-feather="file"></span>Orders</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link active" href="/admin/products"><span data-feather="shopping-cart"></span>Products<span class="sr-only">(current)</span></a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="/admin/customers"><span data-feather="users"></span>Customers</a>
-              </li>
-            </ul>
-        </nav>
-
-        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
-          <h2 class="d-inline float-left mt-4">All Products</h2>
-          <a href="/admin/products/add" class="d-inline float-right btn btn-primary rounded mt-4 text-light"><i class="fas fa-plus-circle"></i> Add New Product</a>
-          <div class="table-responsive">  
-            <table class="table  table-hover">
-              <thead class="thead-light">
-                <tr>
-                  <th>ProductID</th>
-                  <th>Product Name</th>
-                  <th>Category</th>
-                  <th>Price</th>
-                  <th>Unit In Stock</th>                  
-                  <th>Year</th>
-                  <th></th>
-                </tr>
-              </thead>
-              <tbody>
-                <% for(var i=0; i < products.length; i++) { %>
-                    <tr>
-                        <td><%=products[i].productID%></td>
-                        <td><%=products[i].productName%> </td>
-                        <td><%=categories[i].categoryName%></td>
-                        <td><%=products[i].productPrice.toFixed(2)%></td>
-                        <td><%=products[i].unitsInStock%></td>
-                        <td><%=products[i].manufactureYear%></td>
-                        <td class="float-right">
-                          <a href="/admin/products/details?productID=<%=products[i].productID%>" class="btn btn-info rounded"><i class="fas fa-info-circle"></i> Details</a> 
-                          <a href="/admin/products/edit?productID=<%=products[i].productID%>" class="btn btn-success rounded ml-2"><i class="fas fa-edit"></i> Edit</a> 
-                          <a href="/admin/products/delete?productID=<%=products[i].productID%>" class="btn btn-danger rounded ml-2"><i class="fas fa-trash-alt"></i> Delete</a> 
-                        </td>   
-                      </tr>
-                <% }; %>   
-              </tbody>
-            </table>
-          </div>
-        </main>
+    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+      <h2 class="d-inline float-left mt-4">All Products</h2>
+      <a href="/admin/products/add" class="d-inline float-right btn btn-primary rounded mt-4 text-light"><i class="fas fa-plus-circle"></i> Add New Product</a>
+      <div class="table-responsive">
+        <table class="table  table-hover">
+          <thead class="thead-light">
+          <tr>
+            <th>ProductID</th>
+            <th>Product Name</th>
+            <th>Category</th>
+            <th>Price</th>
+            <th>Unit In Stock</th>
+            <th>Year</th>
+            <th></th>
+          </tr>
+          </thead>
+          <tbody>
+          <% for(var i=0; i < products.length; i++) { %>
+          <tr>
+            <td><%=products[i].productID%></td>
+            <td><%=products[i].productName%> </td>
+            <td><%=categories[i].categoryName%></td>
+            <td><%=products[i].productPrice.toFixed(2)%></td>
+            <td><%=products[i].unitsInStock%></td>
+            <td><%=products[i].manufactureYear%></td>
+            <td class="float-right">
+              <a href="/admin/products/details?productID=<%=products[i].productID%>" class="btn btn-info rounded"><i class="fas fa-info-circle"></i> Details</a>
+              <a href="/admin/products/edit?productID=<%=products[i].productID%>" class="btn btn-success rounded ml-2"><i class="fas fa-edit"></i> Edit</a>
+              <a href="/admin/products/delete?productID=<%=products[i].productID%>" class="btn btn-danger rounded ml-2"><i class="fas fa-trash-alt"></i> Delete</a>
+            </td>
+          </tr>
+          <% }; %>
+          </tbody>
+        </table>
       </div>
-    </div>
+    </main>
+  </div>
+</div>
 
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
-    <script src="../../assets/js/vendor/popper.min.js"></script>
-    <script src="../../dist/js/bootstrap.min.js"></script>
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
+<script src="../../assets/js/vendor/popper.min.js"></script>
+<script src="../../dist/js/bootstrap.min.js"></script>
 
-    <!-- Icons -->
-    <script src="https://unpkg.com/feather-icons/dist/feather.min.js"></script>
-    <script>
-      feather.replace()
-    </script>
-  </body>
+<!-- Icons -->
+<script src="https://unpkg.com/feather-icons/dist/feather.min.js"></script>
+<script>
+  feather.replace()
+</script>
+</body>
 </html>

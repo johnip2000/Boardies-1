@@ -103,6 +103,7 @@ class HomeController {
     }
 
     async Cart(req, res) {
+        req.session['ConfirmAddr'] = false;
         const isLogin = req.session.loggedin ? true : false;
         var isAdmin = false;
         //console.log(req.session);
@@ -111,6 +112,7 @@ class HomeController {
                 isAdmin = user.recordset[0].isAdmin;
             });
         }
+        //console.log(req.session.Voucher);
         if (isLogin == false) {
             return res.redirect('/login');
         } else {
@@ -132,7 +134,7 @@ class HomeController {
                             runQuery(updatequery, function (result) {
                             });
                         } else {
-                            var insertquery = "INSERT INTO PreOrder(UserEmail, TotalPrePrice) VALUES ('" + req.session.username + "','" + TotalPrice + "')";
+                            var insertquery = "INSERT INTO PreOrder(UserEmail, TotalPrePrice, UseCoupon) VALUES ('" + req.session.username + "','" + TotalPrice + "' , 0)";
                             runQuery(insertquery, function (result) {
                             });
                         }
@@ -142,6 +144,10 @@ class HomeController {
                     runQuery('SELECT * FROM Promotions WHERE code = \'' + req.session.code + '\' ', function (dresult) {
                         if (dresult.recordset[0].status == 1) {
                             TotalPrice = TotalPrice * (1 - (dresult.recordset[0].percentOff / 100));
+                            runQuery('UPDATE PreOrder SET UseCoupon = 1   WHERE  UserEmail = \'' + req.session.username + '\' ', function(updatecoupon){
+                                runQuery('UPDATE PreOrder SET TotalPrePrice =  \'' + TotalPrice + '\' WHERE  UserEmail = \'' + req.session.username + '\' ', function (result) {
+                                })
+                            })
                             return res.render('pages/cart', {
                                 Warning: null,
                                 listCart: result.recordset,
