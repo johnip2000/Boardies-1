@@ -13,6 +13,9 @@ var CheckoutRouter = require('./routes/checkout');
 
 let app = express();
 
+const PORT = process.env.PORT || '7000';
+app.set('port', PORT);
+
 app.use(methodOverride('_method'));
 app.use(session({
   secret: 'secret',
