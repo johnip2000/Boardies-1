@@ -1,0 +1,110 @@
+<%- include('../header'); -%>
+
+<div class="mb-auto mt-4">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 col-xl-9 mb-5">
+                <form method="post" action="/customer/address/add">
+                    <input type="hidden" name="userID" value="<%=userInfo.userID%>">
+                    <div class="block-body">
+                        <div class="row">
+                            <div class="form-group col-md-6">
+                                <label for="address-fullName">Full Name *</label>
+                                <input type="text" id="address-fullName" class="u-full-width form-control" name="fullName" value="">
+                                <% if(typeof errorFullName !== 'undefined' && errorFullName) { %>
+                                    <small id="errorFullname" class="form-text text-danger font-weight-bold"><%=errorFullName%></small>
+                                <% } %>   
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="address-address1">Address 1 *</label>
+                                <input type="text" id="address-address1" class="u-full-width form-control" name="address1" value="">
+                                <% if(typeof errorAddress !== 'undefined' && errorAddress) { %>
+                                    <small id="errorAddress" class="form-text text-danger font-weight-bold"><%=errorAddress%></small>
+                                <% } %>   
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="address-address2">Address 2</label>
+                                <input type="text" id="address-address2" class="u-full-width form-control" name="address2" value="">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="address-city">City *</label>
+                                <input type="text" id="address-city" class="u-full-width form-control" name="city" value="">
+                                <% if(typeof errorCity !== 'undefined' && errorCity) { %>
+                                    <small id="errorCity" class="form-text text-danger font-weight-bold"><%=errorCity%></small>
+                                <% } %>   
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="address-zipCode">Postal Code *</label>
+                                <input type="text" id="address-zipCode" class=" form-control" name="postalCode" value="">
+                                <% if(typeof errorPostalCode !== 'undefined' && errorPostalCode) { %>
+                                    <small id="errorPostalCode" class="form-text text-danger font-weight-bold"><%=errorPostalCode%></small>
+                                <% } %>   
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="address-state">Province *</label>
+                                <select id="address-state"class="form-control" name="province">
+                                    <option value="Alberta">Alberta</option>
+                                    <option value="British Columbia">British Columbia</option>          
+                                    <option value="Manitoba">Manitoba</option>
+                                    <option value="NewBrunswick">New Brunswick</option>
+                                    <option value="Newfoundland and Labrador">Newfoundland and Labrador</option>
+                                    <option value="Northwest Territories">Northwest Territories</option>
+                                    <option value="Nova Scotia">Nova Scotia</option>
+                                    <option value="Nunavut">Nunavut</option>
+                                    <option value="Ontario">Ontario</option>
+                                    <option value="Prince Edward Island">Prince Edward Island</option>
+                                    <option value="Quebec">Quebec</option>
+                                    <option value="Saskatchewan">Saskatchewan</option>     
+                                    <option value="Yukon">Yukon</option>                         
+                                </select>  
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="address-countryId">Country *</label>
+                                <select class="form-control" name="country">
+                                    <option value="Canada" selected>Canada</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="address-phone">Phone</label>
+                                <input type="text" id="address-phone" class="u-full-width form-control" name="phone" value="">
+                                <% if(typeof errorPhone !== 'undefined' && errorPhone) { %>
+                                    <small id="errorPhone" class="form-text text-danger font-weight-bold"><%=errorPhone%></small>
+                                <% } %>   
+                            </div>
+                        </div>
+                    </div>                      
+                    <div class="mt-4 d-flex justify-content-between flex-column flex-lg-row">
+                        <a href="/customer/address" class="btn btn-link text-muted"> <i class="fa fa-angle-left mr-2"></i>Back </a>
+                        <input type="submit" class="btn btn-dark" value="Save Address">
+                    </div>
+                </form>
+            </div>
+            <div class="col-xl-3 col-lg-4 mb-5">
+                <div class="customer-sidebar card border-0">
+                    <div class="customer-profile">
+                        <h5><%=userInfo.fullName%></h5>
+                    </div>
+                    <nav class="list-group customer-nav">
+                        <a href="/customer/profile" class="list-group-item">
+                            <i class="far fa-user-circle mr-2"></i> Profile
+                        </a>
+                        <a href="/customer/address" class="list-group-item active">
+                            <i class="fas fa-map-marker-alt mr-2"></i> Address Information
+                        </a>
+                        <a href="/customer/orders" class="list-group-item">
+                            <i class="fas fa-shopping-bag mr-2"></i> Your Order
+                        </a>
+                        <a href="/customer/changepassword" class="list-group-item"><span>
+                          <i class="fas fa-key mr-2"></i>Change your password</span>
+                        </a>
+                        <a href="/logout" class="list-group-item"><span>
+                            <i class="fas fa-sign-out-alt mr-2"></i>Log out</span>
+                          </a>    
+                    </nav>
+                </div>
+            </div>  
+        </div>      
+    </div>
+</div>
+
+<%- include('../footer'); -%>

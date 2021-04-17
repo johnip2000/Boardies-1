@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="icon" href="/docs/4.1/assets/img/favicons/favicon.ico">
+    <title>Product Inventory</title>
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <!-- Custom styles for this template -->
+    <link rel="stylesheet" href="/styles/dashboard.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+
+  </head>
+
+  <body>
+    <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
+        <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="/">Boardies</a>
+        <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
+        <ul class="navbar-nav px-3">
+          <li class="nav-item text-nowrap">
+            <a class="nav-link" href="/logout">Sign out</a>
+          </li>
+        </ul>
+    </nav>
+
+    <div class="container-fluid">
+      <div class="row">
+        <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+          <div class="sidebar-sticky">
+            <ul class="nav flex-column">
+              <li class="nav-item">
+                <a class="nav-link active" href="/admin"><span data-feather="home"></span>Dashboard</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/admin/orders"><span data-feather="file"></span>Orders</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/admin/products"><span data-feather="shopping-cart"></span>Products<span class="sr-only">(current)</span></a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/admin/customers"><span data-feather="users"></span>Customers</a>
+              </li>
+            </ul>
+        </nav>
+
+        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+            <h2 class="mt-4 text-center">Add a new product</h2>
+            <hr class="mb-4">
+            <form class="form-group" method="post" action="/admin/products/add">
+                <div class="form-group row">
+                    <label class="col-form-label col-sm-2" for="name">Product Name (*):</label>
+                    <div class="col-sm-6">
+                        <input class="form-control" type="text" name="productName"/>
+                    </div>
+                    <% if(typeof nameError !== 'undefined' && nameError) { %>
+                        <medium id="nameError" class="form-text text-danger font-weight-bold text-center mt-2"><%=nameError%></medium>
+                    <% } %>  
+                </div>
+                <div class="form-group row">
+                    <label class="col-form-label col-sm-2" for="image">Product Category (*):</label>
+                    <div class="col-sm-6">
+                        <select class="form-control" name="category">
+                            <option value="6">Adventures</option>  
+                            <option value="1">Child</option>
+                            <option value="2">Family</option>      
+                            <option value="4">Strategy Advanced</option>    
+                            <option value="3">Strategy Light</option>
+                            <option value="5">Wargames</option>                                  
+                        </select>  
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-form-label col-sm-2" for="name">Product Price (*):</label>
+                    <div class="col-sm-6">
+                        <input class="form-control" type="text" name="price"/>
+                    </div>
+                    <% if(typeof priceError !== 'undefined' && priceError) { %>
+                        <medium id="priceError" class="form-text text-danger font-weight-bold text-center mt-2"><%=priceError%></medium>
+                    <% } %>  
+                </div>
+                <div class="form-group row">
+                    <label class="col-form-label col-sm-2" for="name">Unit In Stock (*):</label>
+                    <div class="col-sm-6">
+                        <input class="form-control" type="text" name="unitInStock"/>
+                    </div>
+                    <% if(typeof unitInStockError !== 'undefined' && unitInStockError) { %>
+                        <medium id="unitInStockError" class="form-text text-danger font-weight-bold text-center mt-2"><%=unitInStockError%></medium>
+                    <% } %>  
+                </div>
+                <div class="form-group row">
+                    <label class="col-form-label col-sm-2" for="description">Description (*):</label>
+                    <div class="col-sm-6">
+                        <textarea class="form-control" name="description" rows="4"></textarea>
+                    </div>
+                    <% if(typeof descriptionError !== 'undefined' && descriptionError) { %>
+                        <medium id="descriptionError" class="form-text text-danger font-weight-bold text-center mt-2"><%=descriptionError%></medium>
+                    <% } %>  
+                </div>
+                <div class="form-group row">
+                    <label class="col-form-label col-sm-2" for="description">Macnufacture Year (*):</label>
+                    <div class="col-sm-6">
+                        <input class="form-control" type="text" name="year"/>
+                    </div>
+                    <% if(typeof yearError !== 'undefined' && yearError) { %>
+                        <medium id="yearError" class="form-text text-danger font-weight-bold text-center mt-2"><%=yearError%></medium>
+                    <% } %>  
+                </div>
+                <div class="form-group row">
+                    <label class="col-form-label col-sm-2" for="image">Product Image (*):</label>
+                    <div class="col-sm-6">
+                      <input class="form-control" type="text" name="image"/>
+                    </div>
+                    <% if(typeof imageError !== 'undefined' && imageError) { %>
+                        <medium id="imageError" class="form-text text-danger font-weight-bold text-center mt-2"><%=imageError%></medium>
+                    <% } %>  
+                </div>
+                <input class="btn btn-primary btn-block" type="submit" value="Submit"/>
+            </form>
+        </main>
+      </div>
+    </div>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
+    <script src="../../assets/js/vendor/popper.min.js"></script>
+    <script src="../../dist/js/bootstrap.min.js"></script>
+
+    <!-- Icons -->
+    <script src="https://unpkg.com/feather-icons/dist/feather.min.js"></script>
+    <script>
+      feather.replace()
+    </script>
+  </body>
+</html>

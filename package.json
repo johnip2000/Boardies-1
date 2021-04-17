@@ -4,25 +4,33 @@
   "private": true,
   "scripts": {
     "test": "mocha",
-    "start": "node --experimental-modules --es-module-specifier-resolution=node server.js"
+    "start": "nodemon --experimental-modules --es-module-specifier-resolution=node server.js"
   },
   "dependencies": {
     "assert": "^2.0.0",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
+    "connect-flash": "^0.1.1",
     "ejs": "^3.1.5",
+    "email-templates": "^8.0.3",
     "express": "^4.17.1",
+    "express-formidable": "^1.2.0",
     "express-session": "^1.17.1",
     "express-validator": "^6.6.1",
+    "fs": "^0.0.1-security",
     "jsdom": "^16.4.0",
     "method-override": "^3.0.0",
     "mocha": "^8.3.0",
-    "msnodesqlv8": "^2.0.11",
+    "msnodesqlv8": "^2.0.13",
     "mssql": "^6.3.1",
     "multer": "^1.4.2",
     "njwt": "^1.0.0",
-    "nodemon": "^2.0.4",
+    "nodemailer": "^6.5.0",
+    "nodemon": "^2.0.7",
+    "passport": "^0.4.1",
+    "passport-google-oauth": "^2.0.0",
     "passport-local": "^1.0.0",
+    "stripe": "^8.144.0",
     "supertest": "^6.1.3"
   }
 }

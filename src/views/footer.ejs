@@ -64,9 +64,24 @@
                 <div class="col-lg-2 col-6  mb-3 mb-lg-0 d-flex-column ">
                     <h6 class="text-uppercase text-dark mb-3">Account</h6>
                     <ul class="list-unstyled">
-                        <li>
-                            <a href="/login">Login / Register</a>
-                        </li>
+                        <% if(isLogin == false){ %>
+                            <li>
+                                <a href="/login">Login / Register</a>
+                            </li>
+                        <% } else {%> 
+                            <li>
+                                <a href="/customer/profile">Profile</a>
+                            </li>
+                            <li>
+                                <a href="/customer/orders">Orders</a>
+                            </li>
+                            <li>
+                                <a href="/customer/changepassword">Change Password</a>
+                            </li>
+                            <li>
+                                <a href="/logout">Logout</a>
+                            </li>
+                        <% } %>
                     </ul>
                 </div>
             </div>

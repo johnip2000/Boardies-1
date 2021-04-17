@@ -1,0 +1,75 @@
+<%- include('../header'); -%>
+
+<div class="mb-auto">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 col-xl-9">
+                <div class="block mb-5 mt-5">
+                    <div class="block-header"><strong class="text-uppercase">List of Order</strong></div>
+                        <div class="block-body mt-5">
+                            <div class="row">
+                                <div class="col-12">
+                                    <% if(orders.length > 0) { %> 
+                                        <table class="table table-striped table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th>orderID</th>
+                                                    <th>Order Date</th>						
+                                                    <th>Status</th>	
+                                                    <th></th>					
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <%orders.forEach(function(item){%>
+                                                    <tr>
+                                                        <td><%=item.orderID%></td>
+                                                        <td><%=item.orderDate%></td>
+                                                        <% if(item.status == "cancelled") { %> 
+                                                            <td class="text-danger font-weight-bold"><%=item.status.toUpperCase()%></td>
+                                                        <%} else {%>
+                                                            <td class="text-success font-weight-bold"><%=item.status.toUpperCase()%></td>
+                                                        <%}%>
+                                                        <td><a href="/customer/orders/detail?orderID=<%=item.orderID%>" class="view" title="View Details" data-toggle="tooltip"><i class="fas fa-arrow-circle-right fa-2x"></i></a></td>
+                                                    </tr>      
+                                                <% }); %>      
+                                            </tbody>
+                                        </table>   
+                                        <% } else {%>  
+                                            <p>You don't have any orders yet.</p>
+                                        <% } %>                            
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <div class="col-xl-3 col-lg-4 mb-5 mt-5">
+                <div class="customer-sidebar card border-0">
+                    <div class="customer-profile">
+                        <h5><%=userInfo.fullName%></h5>
+                    </div>
+                    <nav class="list-group customer-nav">
+                        <a href="/customer/profile" class="list-group-item">
+                            <i class="far fa-user-circle mr-2"></i> Profile
+                        </a>
+                        <a href="/customer/address" class="list-group-item">
+                            <i class="fas fa-map-marker-alt mr-2"></i> Address Information
+                        </a>
+                        <a href="/customer/orders" class="list-group-item active">
+                            <i class="fas fa-shopping-bag mr-2"></i> Your Order
+                        </a>
+                        <a href="/customer/changepassword" class="list-group-item"><span>
+                          <i class="fas fa-key mr-2"></i>Change your password</span>
+                        </a>
+                        <a href="/logout" class="list-group-item"><span>
+                            <i class="fas fa-sign-out-alt mr-2"></i>Log out</span>
+                          </a>    
+                    </nav>
+                </div>
+            </div>
+
+            
+        </div>
+    </div>
+</div>
+
+<%- include('../footer'); -%>

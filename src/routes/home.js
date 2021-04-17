@@ -12,5 +12,12 @@ router
     .get('/login', homeController.Login)
     .get('/shipping-info', homeController.ShippingInfo)
     .get('/cart', homeController.Cart)
+    .post('/cart', homeController.AddtoCart)
+    .post('/promotions', homeController.Promotions)
+    .get('/remove', homeController.Remove)
+    .get('/minusitem',homeController.Minusitem)
+    .get('/additem',homeController.Additem)
+    .get('/search', homeController.SearchProduct)
+    .get('/errors', homeController.Error)
 
 module.exports = router;

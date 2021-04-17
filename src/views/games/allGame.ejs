@@ -7,19 +7,22 @@
     </div>
     <div class="row mt-4 mb-4">
         <% listGame.forEach(function(item){%>
-            <div class="col-4 col-sm-8 col-md-6 col-lg-4 mb-4">
-                <div class="card" style="width: 20rem">
-                    <img src="<%=item.productImage%>" class="card-img-top" alt="..."/>
-                    <div class="card-body">
-                        <h5 class="card-title text-center text-uppercase"><%=item.productName%></h5>
-                        <div class="price text-success text-center"><h3>$<%=item.productPrice%></h3></div>
-                    </div>
-                    <div class="card-body">
-                        <a href="#" class="btn btn-info mr-3">View Product</a>
-                        <a href="#" class="btn btn-danger"><i class="fas fa-shopping-cart"></i> Add to Cart</a>
-                    </div>
+        <div class="col-4 col-sm-8 col-md-6 col-lg-4 mb-4">
+            <div class="card" style="width: 20rem">
+                <img src="<%=item.productImage%>" class="card-img-top" alt="..."/>
+                <div class="card-body">
+                    <h5 class="card-title text-center text-uppercase"><%=item.productName%></h5>
+                    <div class="price text-success text-center"><h3>$<%=item.productPrice%></h3></div>
+                </div>
+                <div class="card-body">
+                    <form action="/cart" method="post">
+                        <a href="/games/gameDetails?productID=<%=item.productID%>" class="btn btn-info mr-3"> View Product</a>
+                        <input type=text name="buyitem" value="<%=item.productID%>" hidden>
+                        <button type="submit" class="btn btn-danger"><i class="fas fa-shopping-cart"></i> Add to Cart</button>
+                    </form>
                 </div>
             </div>
+        </div>
         <% }); %>
     </div>
 </div>

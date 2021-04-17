@@ -1,0 +1,102 @@
+<%- include('../header'); -%>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<div class="mb-auto">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 col-xl-8">
+                <div class="block mb-5 mt-5">
+                    <div class="col-12 bg-light">
+                        <ul class="nav nav-pills mb-4 nav-fill bg-light">
+                            <li class="nav-item"><a href="/checkout/addresses?Release=true" class="nav-link text-sm">ADDRESSES</a></li>
+                            <li class="nav-item"><a href="/checkout/shipping" class="nav-link text-sm bg-secondary text-white">SHIPPING & PAYMENT</a></li>
+                            <li class="nav-item"><a href="/checkout/review" class="nav-link text-sm">REVIEW</a></li>
+                        </ul>
+                    </div>
+                    <div class="block-header"><strong class="text-uppercase">SHIPPING</strong></div>
+                    <div class="block-body mt-4">
+                        <div class="block">
+                            <div class="address-fieldset ShippingAddress">
+                                <div class="block-body">
+                                    <div class="row">
+                                        <div id="shippingAddressGroup" class="col-12">
+                                            <div class="card border-light">
+                                                <div class="card-header">
+                                                    <%if(ShipMethod==true){%>
+                                                        <a href="/checkout/shipping?freeship=true" class="text-dark"><i class="fa fa-check-square"></i></a>
+                                                        <label>FREE SHIPPING (3-5 business days)</label>
+                                                    <%}else{%>
+                                                        <a href="/checkout/shipping?freeship=true" class="text-dark"><i class="fa fa-square"></i></a>
+                                                        <label>FREE SHIPPING (3-5 business days)</label>
+                                                    <%}%>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div id="shippingAddressGroup" class="col-12">
+                                            <div class="card border-light">
+                                                <div class="card-header">
+                                                    <%if(ShipMethod==false){%>
+                                                        <a href="/checkout/shipping?freeship=false" class="text-dark"><i class="fa fa-check-square"></i></a>
+                                                        <label>EXPRESS SHIPPING (1-2 business days)</label>
+                                                        <medium class="ml-4">+$4.99</medium>
+                                                    <%}else{%>
+                                                        <a href="/checkout/shipping?freeship=false" class="text-dark"><i class="fa fa-square"></i></a>
+                                                        <label>EXPRESS SHIPPING (1-2 business days)</label>
+                                                        <medium class="ml-4">+$4.99</medium>
+                                                    <%}%>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <form method="post">
+                            <div class="mb-5 mt-4 d-flex justify-content-between flex-column flex-lg-row">
+                                <a href="/checkout/addresses?Release=true" class="btn btn-link text-muted">
+                                    <i class="fa fa-angle-left mr-2"></i>Back </a>
+                                <input type="submit" class="btn btn-dark" value="Final Review">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-4 col-lg-4 mb-5 mt-5">
+                <div class="customer-sidebar card border-0">
+                    <div class="order-summary text-uppercase text-center">Order Summary</div>
+                    <nav class="list-group customer-nav">
+                        <div class="list-group-item bg-light">
+                            <tbody>
+                            <tr>
+                                <%ItemsPurchase.forEach(function(item){%>
+                                <div class="float-left mr-3"> <img class=" img-fluid" src="<%=item.CartProductImage%>" width="100" height="80"></div>
+                                <p class="mt-2 mb-0"><b><%=item.ProductName%></b></p>
+                                <small class="text-muted">Quantity: <%=item.CartProductQuantity%></small><br>
+                                <small class="text-muted">Price: <%=item.Price%></small><br><br><br>
+                                <%})%>
+                            </tr>
+                            </tbody>
+                        </div>
+                        <div class="list-group-item bg-light">
+                            <div class="float-left">Order Subtotal</div>
+                            <div class="float-right">$<%=Subtotal%></div>
+                        </div>
+                        <div class="list-group-item bg-light">
+                            <div class="float-left">Shipping Fee</div>
+                            <div class="float-right">$<%=DShipping%></div>
+                        </div>
+                        <div class="list-group-item bg-light">
+                            <div class="float-left">GST/HST</div>
+                            <div class="float-right">$<%=DTax.toFixed(2)%></div>
+                        </div>
+                        <div class="list-group-item bg-light">
+                            <div class="float-left">Total</div>
+                            <div class="float-right font-weight-bold">$<%=DTempTotal.toFixed(2)%></div>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<%- include('../footer'); -%>
